@@ -1,27 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
+  --black: #000;
+  --white: #ffffff;
+  --transparent-bg: transparent;
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-rgb: 255, 255, 255;
+  --logo-font: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+  --body-font-color: #313131;
+  --body-font-color-rgb: 49, 49, 49;
+  --body-font-size: 15px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --default-btn-bg-rgb: 255, 203, 100;
+  --default-btn-bg: #FFCB64;
+  --disable-btn-bg-rgb: 217, 217, 217;
+  --disable-btn-bg: #D9D9D9;
+  --input-border-color-rgb: 230, 230, 230;
+  --input-border-color: #E6E6E6;
+  --icon-size-1x: 14px;
+  --icon-size-2x: 20px;
+  --fontSize-1x: 14px;
+  --fontSize-2x: 16px;
+  --fontSize-3x: 18px;
+  --fontSize-4x: 20px;
+  --fontSize-5x: 22px;
+  --fontSize-6x: 24px;
+  --fontSize-7x: 28px;
+  --fontSize-8x: 32px;
+  --bs-gutter-x: 20px
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-rgb: 0, 0, 0;
+  }
+} */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: var(--body-font-color);
+  font-size: var(--fontSize-1x);
+  line-height: 1.4;
+  background-color: rgb(var(--background-rgb))
+}
+
+
+.main-heading {
+  font-family: 'Poppins', sans-serif;
+  color: var(--black);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+
+  @media (min-width: 767px) {
+    font-size: 3rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.main-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fontSize-1x);
+  margin-top: 0;
+  margin-bottom: 1rem;
+
+  @media (min-width: 767px) {
+    font-size: 1.75rem;
+  }
+}
+
+footer {
+  background: #f3f1ea;
+  border-top: 2px solid rgba(0, 0, 0, .1);
+  padding-bottom: 90px;
+  padding-top: 38px;
+  margin-top: 38px;
 }
