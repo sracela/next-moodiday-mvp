@@ -24,7 +24,7 @@ export const FALLBACK_GLOBAL = {
           {
             id: 3,
             text: "Accessories & Devices",
-            url: "/devices",
+            url: "/accesories-devices",
             newTab: false,
           },
           {
@@ -36,7 +36,7 @@ export const FALLBACK_GLOBAL = {
           {
             id: 5,
             text: "Tips & Tricks",
-            url: "/tips",
+            url: "/tips-tricks",
             newTab: false,
           },
         ],
@@ -149,4 +149,73 @@ export const FALLBACK_GLOBAL = {
       },
     },
   },
+};
+
+export const MASTER_TAGS_CONTENT = {
+  data: [
+    {
+      id: "1",
+      attributes: {
+        name: "Products",
+        slug: "products",
+        description:
+          "Watch reviews of the top cannabis products sold at dispensaries near you. Browse reviews for product categories including flower, pre-rolls, edibles, beverages, concentrates and more.",
+        image: {
+          data: {
+            attributes: {
+              url: "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/675638ce2f6ecb843b4f7cdbf609dcbc.png",
+            },
+          },
+        },
+      },
+    },
+    {
+      id: "2",
+      attributes: {
+        name: "Accessories & Devices",
+        slug: "accesories-devices",
+        description:
+          "Watch reviews of the top cannabis accessories and devices sold at dispensaries near you. Browse reviews for product categories including vaporizers, pipes, bongs, grinders, rolling papers and more.",
+        image: {
+          data: {
+            attributes: {
+              url: "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/c15202e7b1076eb83f94f375fec6755b.png",
+            },
+          },
+        },
+      },
+    },
+    {
+      id: "3",
+      attributes: {
+        name: "Strains",
+        slug: "strains",
+        description:
+          "Watch reviews of the top cannabis strains sold at dispensaries near you. Browse reviews for strain categories including indica, sativa, hybrid, high CBD, high THC and more.",
+        image: {
+          data: {
+            attributes: {
+              url: "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/7ef06057382d8b41842e0c8c10a30718.png",
+            },
+          },
+        },
+      },
+    },
+    {
+      id: "4",
+      attributes: {
+        name: "Tips & Tricks",
+        slug: "tips-tricks",
+        description:
+          "Watch tips and tricks from budtenders to help you find the right high. Browse tips and tricks for product categories including flower, pre-rolls, edibles, beverages, concentrates and more.",
+        image: {
+          data: {
+            attributes: {
+              url: "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/6d480ac8ea78b7e9615c40ce306f41dd.png",
+            },
+          },
+        },
+      },
+    },
+  ],
 };

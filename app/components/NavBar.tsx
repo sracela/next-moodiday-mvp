@@ -2,6 +2,8 @@
 import Logo from "./Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useScroll } from "../hooks";
 
 interface NavLink {
   id: number;
@@ -36,8 +38,14 @@ export default function Navbar({
   logoUrl: string | null;
   logoText: string | null;
 }) {
+  const isScrolling = useScroll();
+
   return (
-    <div className="p-4">
+    <div
+      className={`bg-white px-4 py-2 sticky top-0 ${
+        isScrolling ? "shadow-md" : ""
+      }`}
+    >
       <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>
           {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}

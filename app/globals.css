@@ -51,7 +51,15 @@ body {
   color: var(--body-font-color);
   font-size: var(--fontSize-1x);
   line-height: 1.4;
-  background-color: rgb(var(--background-rgb))
+  background-color: rgb(var(--background-rgb));
+}
+
+main {
+  max-width: 1320px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 64px;
 }
 
 
@@ -86,4 +94,25 @@ footer {
   padding-bottom: 90px;
   padding-top: 38px;
   margin-top: 38px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+  margin: 24px 0;
+}
+
+.category-title {
+  font-size: var(--fontSize-3x);
+  font-family: var(--logo-font);
+  margin-bottom: 15px;
+}
+
+.thumbnail-image {
+  border-radius: 15px;
+  object-fit: cover;
+  object-position: center;
 }
