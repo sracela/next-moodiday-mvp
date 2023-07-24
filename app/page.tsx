@@ -3,7 +3,8 @@ import { getPageBySlug } from "./utils/api";
 import Link from "next/link";
 
 export default async function Home() {
-  const { pageData: homePage, videoData } = await getPageBySlug("Home");
+  const slug = "Home";
+  const { pageData: homePage, videoData } = await getPageBySlug(slug);
   if (homePage.data.length === 0) return null;
   return (
     <>
@@ -24,7 +25,6 @@ export default async function Home() {
         {homePage.data.map((section: any) => (
           <div key={section.id}>
             <h2 className="py-2">{section.attributes.category_name}</h2>
-            {/* div below has to have no-wrap overflow-x: scroll */}
             <div className="flex flex-row gap-3 py-3 overflow-x-auto">
               {section.attributes.video_details.data.map((video: any) => {
                 const videoPopulated = videoData.find((v) => v.id === video.id);
@@ -32,7 +32,10 @@ export default async function Home() {
                   videoPopulated.attributes.thumbnail?.data?.attributes?.url ??
                   `https://image.mux.com/${videoPopulated?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
                 return (
-                  <Link key={video.id} href={`/Home/${video.attributes.slug}`}>
+                  <Link
+                    key={video.id}
+                    href={`/${slug}/${video.attributes.slug}`}
+                  >
                     <div className="flex flex-col items-start justify-between gap-2">
                       <div
                         style={{

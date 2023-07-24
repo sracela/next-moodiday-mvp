@@ -22,6 +22,7 @@ function NavLink({ url, text }: NavLink) {
         className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent ${
           path === url && "dark:text-violet-400 dark:border-violet-400"
         }}`}
+        prefetch={true}
       >
         {text}
       </Link>

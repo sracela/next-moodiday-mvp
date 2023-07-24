@@ -20,3 +20,20 @@ export const useScroll = () => {
   }, []);
   return isScrolling;
 };
+
+export function useDevice() {
+  const [width, setWidth] = useState<number | null>(null);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+  const isMobile = width ? width <= 1400 : null;
+
+  return { isMobile };
+}

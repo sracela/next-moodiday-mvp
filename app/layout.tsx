@@ -88,13 +88,11 @@ export default function RootLayout({
 
         <main className="min-h-screen overflow-x-hidden px-2">{children}</main>
 
-        {/* <Banner data={notificationBanner} /> */}
-
         <Footer
           logoUrl={footerLogoUrl}
           logoText={footer.footerLogo.logoText}
           menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
+          budtenderNetworkyLinks={footer.budtenderNetworkyLinks.data}
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
         />

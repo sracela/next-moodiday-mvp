@@ -78,7 +78,7 @@ export const FALLBACK_GLOBAL = {
           {
             id: 3,
             text: "Accessories & Devices",
-            url: "/devices",
+            url: "/accessories-devices",
             newTab: false,
           },
           {
@@ -90,7 +90,7 @@ export const FALLBACK_GLOBAL = {
           {
             id: 5,
             text: "Tips & Tricks",
-            url: "/tips",
+            url: "/tips-tricks",
             newTab: false,
           },
         ],
@@ -100,18 +100,21 @@ export const FALLBACK_GLOBAL = {
             text: "Instagram",
             url: "https://www.instagram.com/moodi_day/",
             newTab: true,
+            social: "INSTAGRAM",
           },
           {
             id: 2,
             text: "Twitter",
             url: "https://twitter.com/moodi_day",
             newTab: true,
+            social: "TWITTER",
           },
           {
             id: 3,
             text: "Facebook",
             url: "https://www.facebook.com/moodi_day-100105632327184",
             newTab: true,
+            social: "FACEBOOK",
           },
         ],
         legalLinks: [
@@ -128,20 +131,20 @@ export const FALLBACK_GLOBAL = {
             newTab: false,
           },
         ],
-        categories: {
+        budtenderNetworkyLinks: {
           data: [
             {
               id: "1",
               attributes: {
-                name: "Flower",
-                slug: "flower",
+                name: "Apply to Join",
+                slug: "budtender-network",
               },
             },
             {
               id: "2",
               attributes: {
-                name: "Edibles",
-                slug: "edibles",
+                name: "Creator Portal",
+                slug: "creator-portal",
               },
             },
           ],

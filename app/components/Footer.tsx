@@ -4,7 +4,12 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { CgWebsite } from "react-icons/cg";
 import { FaDiscord } from "react-icons/fa";
-import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
+import {
+  AiFillTwitterCircle,
+  AiFillYoutube,
+  AiFillInstagram,
+  AiFillFacebook,
+} from "react-icons/ai";
 
 interface FooterLink {
   id: number;
@@ -14,7 +19,7 @@ interface FooterLink {
   social?: string;
 }
 
-interface CategoryLink {
+interface BudtenderNetworkLink {
   id: string;
   attributes: {
     name: string;
@@ -38,13 +43,10 @@ function FooterLink({ url, text }: FooterLink) {
   );
 }
 
-function CategoryLink({ attributes }: CategoryLink) {
+function BudtenderNetworkLink({ attributes }: BudtenderNetworkLink) {
   return (
     <li className="flex">
-      <Link
-        href={`/blog/${attributes.slug}`}
-        className="hover:dark:text-violet-400"
-      >
+      <Link href={`/${attributes.slug}`} className="hover:dark:text-violet-400">
         {attributes.name}
       </Link>
     </li>
@@ -53,14 +55,12 @@ function CategoryLink({ attributes }: CategoryLink) {
 
 function RenderSocialIcon({ social }: { social: string | undefined }) {
   switch (social) {
-    case "WEBSITE":
-      return <CgWebsite />;
+    case "INSTAGRAM":
+      return <AiFillInstagram />;
     case "TWITTER":
       return <AiFillTwitterCircle />;
-    case "YOUTUBE":
-      return <AiFillYoutube />;
-    case "DISCORD":
-      return <FaDiscord />;
+    case "FACEBOOK":
+      return <AiFillFacebook />;
     default:
       return null;
   }
@@ -70,14 +70,14 @@ export default function Footer({
   logoUrl,
   logoText,
   menuLinks,
-  categoryLinks,
+  budtenderNetworkyLinks,
   legalLinks,
   socialLinks,
 }: {
   logoUrl: string | null;
   logoText: string | null;
   menuLinks: Array<FooterLink>;
-  categoryLinks: Array<CategoryLink>;
+  budtenderNetworkyLinks: Array<BudtenderNetworkLink>;
   legalLinks: Array<FooterLink>;
   socialLinks: Array<FooterLink>;
 }) {
@@ -92,10 +92,10 @@ export default function Footer({
           </div>
 
           <div className="col-span-6 text-center md:text-left md:col-span-3">
-            <p className="pb-1 text-lg font-medium">Categories</p>
+            <p className="pb-1 text-lg font-medium">Budtender Network</p>
             <ul>
-              {categoryLinks.map((link: CategoryLink) => (
-                <CategoryLink key={link.id} {...link} />
+              {budtenderNetworkyLinks.map((link: BudtenderNetworkLink) => (
+                <BudtenderNetworkLink key={link.id} {...link} />
               ))}
             </ul>
           </div>

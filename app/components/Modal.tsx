@@ -1,15 +1,24 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { getVideoDataBySlug } from "../utils/api";
+import Player from "./Player";
+import ReactMarkdown from "react-markdown";
+import Link from "next/link";
 
-export default async function Modal({ videoSlug }: { videoSlug: string }) {
+export default async function Modal({
+  pageSlug,
+  videoSlug,
+}: {
+  pageSlug: string;
+  videoSlug: string;
+}) {
+  if (!videoSlug) return null;
   const videoData = await getVideoDataBySlug(videoSlug);
   const video = videoData[0];
-  console.log(video);
-  const videoThumbnail =
-    video?.attributes?.thumbnail?.data?.attributes?.url ??
-    `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+
+  //   const videoThumbnail =
+  //     video?.attributes?.thumbnail?.data?.attributes?.url ??
+  //     `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -17,26 +26,41 @@ export default async function Modal({ videoSlug }: { videoSlug: string }) {
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
-        <div className="flex justify-center items-center relative z-10 bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6">
-          <div
-            key={video.id}
-            className="flex flex-col items-start justify-between gap-2"
-          >
-            <div
-              style={{
-                width: "max-content",
-              }}
-            >
-              <Image
+        <div className="flex justify-center items-center relative z-10 bg-white rounded-lg overflow-hidden transform transition-all modal-box">
+          <article className="modal-box-inner">
+            <h1 style={{ display: "none" }}>{video?.attributes?.video_name}</h1>
+            <section className="player-wrapper">
+              {/* <Image
                 src={videoThumbnail}
                 alt={video?.attributes?.title}
                 className="thumbnail-image"
                 width={165}
                 height={273}
+              /> */}
+              <Player
+                playbackId={
+                  video?.attributes?.mux_video?.data?.attributes?.playback_id
+                }
+                videoName={video?.attributes?.video_name}
+                videoId={video?.id}
               />
-            </div>
-            <p>{video?.attributes?.video_name}</p>
-          </div>
+            </section>
+            <section className="description-wrapper">
+              <ReactMarkdown>
+                {video?.attributes.rich_description}
+              </ReactMarkdown>
+            </section>
+          </article>
+          <button className="close-btn">
+            <Link href={`/${pageSlug !== "Home" ? pageSlug : ""}`}>
+              <Image
+                src={"/cross.png"}
+                alt="close modal"
+                width={20}
+                height={20}
+              />
+            </Link>
+          </button>
         </div>
       </div>
     </div>

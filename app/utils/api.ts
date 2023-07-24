@@ -65,9 +65,14 @@ export async function getVideoDataById(id?: string) {
   return data.data;
 }
 
-export async function getVideoDataBySlug(slug?: string) {
+export async function getVideoDataBySlug(
+  slug?: string,
+  populate: boolean = true
+) {
   if (!slug) return;
-  const path = `/video-details?filters[slug][$eq]=${slug}&populate[mux_video]=1&populate[thumbnail][fields][0]=url`;
+  const path = `/video-details?filters[slug][$eq]=${slug}${
+    populate && "&populate[mux_video]=1&populate[thumbnail][fields][0]=url"
+  }`;
   const requestUrl = `${getStrapiURL(`/api${path}`)}`;
   const response = await fetch(requestUrl, {
     method: "get",

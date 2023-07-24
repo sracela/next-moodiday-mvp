@@ -22,9 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pageSlug = slug[0];
   const videoSlug = slug[1];
 
+  const videoInfo = await getVideoDataBySlug(videoSlug, false);
+  console.log({ videoInfo, videoSlug });
+
   const metadata = !videoSlug
     ? getMetaFromMasterTag(pageSlug)
-    : getMetaFromVideo(videoSlug, pageSlug);
+    : getMetaFromVideo(
+        videoInfo?.attributes?.video_name || videoSlug,
+        pageSlug
+      );
 
   return {
     title: metadata.title,
@@ -43,7 +49,7 @@ export default async function PageRoute({ params }: Props) {
   const { slug } = params;
   const pageSlug = slug[0];
   const videoSlug = slug[1];
-  const { pageData: page } = await getPageBySlug(pageSlug);
+  const { pageData: page, videoData } = await getPageBySlug(pageSlug);
   if (page.data.length === 0) return null;
 
   //   const contentSections = page.data[0].attributes.contentSections;
@@ -53,8 +59,13 @@ export default async function PageRoute({ params }: Props) {
 
   return (
     <>
-      <MainSection page={page} imageURL={getImageURL(pageSlug)} />
-      {videoSlug && <Modal videoSlug={videoSlug} />}
+      <MainSection
+        page={page}
+        imageURL={getImageURL(pageSlug)}
+        videoData={videoData}
+        pageSlug={pageSlug}
+      />
+      <Modal pageSlug={pageSlug} videoSlug={videoSlug} />
     </>
   );
 }
