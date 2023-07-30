@@ -34,7 +34,7 @@ export default async function MainSection({
 }: Props) {
   return (
     <>
-      <div className="container mx-auto text-center">
+      <div className="text-center">
         {title && <h1 className="main-heading">{title}</h1>}
         {description && <p className="main-subtitle">{description}</p>}
         {imageURL && (
@@ -47,7 +47,7 @@ export default async function MainSection({
           />
         )}
       </div>
-      <div className="container mx-auto flex flex-col py-2 gap-6">
+      <div className="flex flex-col py-2 gap-6">
         {page.data.map((section: any) => (
           <div key={section.id}>
             <h2 className="py-2 section-heading">
