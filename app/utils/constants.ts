@@ -53,45 +53,77 @@ export const FALLBACK_GLOBAL = {
       },
       footer: {
         footerLogo: {
-          logoImg: {
-            data: {
-              attributes: {
-                url: "",
-              },
-            },
-          },
           logoText: "moodi day",
         },
-        menuLinks: [
-          // {
-          //   id: 1,
-          //   text: "Home",
-          //   url: "/",
-          //   newTab: false,
-          // },
+        footerColumns: [
+          {
+            id: 1,
+            order: 0,
+            title: "Budtender Network",
+            columnLinks: [
+              {
+                id: 4,
+                text: "Apply to Join",
+                url: "/budtender-network",
+                newTab: false,
+              },
+              {
+                id: 5,
+                text: "Creator Portal",
+                url: "/creator-portal",
+                newTab: false,
+              },
+            ],
+          },
           {
             id: 2,
-            text: "Products",
-            url: "/products",
-            newTab: false,
+            order: 1,
+            title: "Categories",
+            columnLinks: [
+              {
+                id: 2,
+                text: "Products",
+                url: "/products",
+                newTab: false,
+              },
+              {
+                id: 3,
+                text: "Accessories & Devices",
+                url: "/accesories-devices",
+                newTab: false,
+              },
+              {
+                id: 4,
+                text: "Strains",
+                url: "/strains",
+                newTab: false,
+              },
+              {
+                id: 5,
+                text: "Tips & Tricks",
+                url: "/tips-tricks",
+                newTab: false,
+              },
+            ],
           },
           {
             id: 3,
-            text: "Accessories & Devices",
-            url: "/accessories-devices",
-            newTab: false,
-          },
-          {
-            id: 4,
-            text: "Strains",
-            url: "/strains",
-            newTab: false,
-          },
-          {
-            id: 5,
-            text: "Tips & Tricks",
-            url: "/tips-tricks",
-            newTab: false,
+            order: 2,
+            title: "Legal",
+            columnLinks: [
+              {
+                id: 1,
+                text: "Privacy Policy",
+                url: "/privacy-policy",
+                newTab: false,
+              },
+              {
+                id: 2,
+                text: "Terms of Use",
+                url: "/terms-of-use",
+                newTab: false,
+              },
+            ],
           },
         ],
         socialLinks: [
@@ -117,37 +149,19 @@ export const FALLBACK_GLOBAL = {
             social: "FACEBOOK",
           },
         ],
-        legalLinks: [
-          {
-            id: 1,
-            text: "Privacy Policy",
-            url: "/privacy-policy",
-            newTab: false,
-          },
-          {
-            id: 2,
-            text: "Terms of Use",
-            url: "/terms-of-use",
-            newTab: false,
-          },
-        ],
-        budtenderNetworkyLinks: {
-          data: [
-            {
-              id: "1",
-              attributes: {
-                name: "Apply to Join",
-                slug: "budtender-network",
-              },
-            },
-            {
-              id: "2",
-              attributes: {
-                name: "Creator Portal",
-                slug: "creator-portal",
-              },
-            },
-          ],
+        disclaimer: {
+          title: "Disclaimer:",
+          description:
+            "These products are not intended to diagnose, treat, cure or prevent any disease. All information presented here is not meant as a substitute for or alternative to information from healthcare practitioners. Please consult your healthcare professional about potential interactions or other possible complications before using any product. Effects & Medical Attributes are based on anecdotal evidence. Individual experiences can be varied.",
+        },
+        externalImage: {
+          altText: "Footer Image",
+          src: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/Spotlight/Moodi%20Day%20Creator%20Spotlight.mp4",
+        },
+        footerForm: {
+          title: "Can't find the review you need? Request it!",
+          description:
+            "Our budtender network will review it and email you when it's ready.",
         },
       },
     },

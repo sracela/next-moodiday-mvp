@@ -11,10 +11,10 @@ interface NavLink {
   id: number;
   url: string;
   newTab: boolean;
-  text: string;
+  label: string;
 }
 
-function NavLink({ url, text }: NavLink) {
+function NavLink({ url, label }: NavLink) {
   const path = usePathname();
 
   return (
@@ -28,7 +28,7 @@ function NavLink({ url, text }: NavLink) {
         }`}
         prefetch={true}
       >
-        {text}
+        {label}
       </Link>
     </li>
   );
@@ -39,7 +39,7 @@ function NavMenuMobile({ links }: { links: Array<NavLink> }) {
   return (
     <div className="mobileMenu p-8 shadow-md">
       <ul className="flex flex-col space-y-4">
-        {links.map(({ id, url, text }) => (
+        {links.map(({ id, url, label }) => (
           <li key={id} className={`flex`}>
             <Link
               href={url}
@@ -47,7 +47,7 @@ function NavMenuMobile({ links }: { links: Array<NavLink> }) {
                 path === url ? "text-black" : "text-black-500"
               }`}
             >
-              {text}
+              {label}
             </Link>
           </li>
         ))}

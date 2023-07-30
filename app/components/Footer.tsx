@@ -17,39 +17,39 @@ interface FooterLink {
   id: number;
   url: string;
   newTab: boolean;
-  text: string;
+  label: string;
   social?: string;
 }
 
-interface BudtenderNetworkLink {
-  id: string;
-  attributes: {
-    name: string;
-    slug: string;
-  };
-}
+type FooterColumn = {
+  id: number;
+  title: string;
+  columnLinks: Array<FooterLink>;
+};
+type FooterForm = {
+  title: string;
+  description: string;
+};
+type Disclaimer = {
+  title: string;
+  description: string;
+};
+type ExternalImage = {
+  src: string;
+  altText: string;
+};
 
-function FooterLink({ url, text }: FooterLink) {
+function FooterLink({ url, label }: FooterLink) {
   const path = usePathname();
   return (
     <li className="flex text-center md:text-left">
       <Link
         href={url}
-        className={`hover:dark:text-violet-400 ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
-        }}`}
+        className={`flex hover:text-black ${
+          path === url ? "text-black" : "text-black-500"
+        }`}
       >
-        {text}
-      </Link>
-    </li>
-  );
-}
-
-function BudtenderNetworkLink({ attributes }: BudtenderNetworkLink) {
-  return (
-    <li className="flex text-center md:text-left">
-      <Link href={`/${attributes.slug}`} className="hover:dark:text-violet-400">
-        {attributes.name}
+        {label}
       </Link>
     </li>
   );
@@ -71,17 +71,19 @@ function RenderSocialIcon({ social }: { social: string | undefined }) {
 export default function Footer({
   logoUrl,
   logoText,
-  menuLinks,
-  budtenderNetworkyLinks,
-  legalLinks,
+  footerColumns,
   socialLinks,
+  footerForm,
+  externalImage,
+  disclaimer,
 }: {
   logoUrl: string | null;
   logoText: string | null;
-  menuLinks: Array<FooterLink>;
-  budtenderNetworkyLinks: Array<BudtenderNetworkLink>;
-  legalLinks: Array<FooterLink>;
   socialLinks: Array<FooterLink>;
+  footerColumns?: Array<FooterColumn>;
+  footerForm?: FooterForm;
+  externalImage?: ExternalImage;
+  disclaimer: Disclaimer;
 }) {
   const formRef = React.useRef<HTMLDivElement>(null);
   const script = document.createElement("script");
@@ -108,21 +110,15 @@ export default function Footer({
         <div className="pt-4 grid grid-cols-12">
           <div className="col-span-12 md:col-span-6">
             <h1 className="pt-2 pb-1 text-lg font-medium font-logo">
-              Can&apos;t find the review you need? Request it!
+              {footerForm?.title}
             </h1>
-            <p>
-              Our budtender network will review it and email you when it&apos;s
-              ready.
-            </p>
+            <p>{footerForm?.description}</p>
 
             <div id="hbspt" ref={formRef} className="pt-5" />
           </div>
           <div className="col-span-6 pl-8 hidden md:flex">
             <video width="100%" controls autoPlay={true} playsInline muted loop>
-              <source
-                src="https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/Spotlight/Moodi%20Day%20Creator%20Spotlight.mp4"
-                type="video/mp4"
-              />
+              <source src={externalImage?.src} type="video/mp4" />
             </video>
           </div>
         </div>
@@ -132,51 +128,28 @@ export default function Footer({
               {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
             </Logo>
           </div>
-
-          <div className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-3">
-            <p className="pt-2 pb-1 text-md font-medium font-logo">
-              Budtender Network
-            </p>
-            <ul className="flex flex-col justify-center items-center sm:items-start">
-              {budtenderNetworkyLinks.map((link: BudtenderNetworkLink) => (
-                <BudtenderNetworkLink key={link.id} {...link} />
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-3">
-            <p className="pt-2 pb-1 text-md font-medium font-logo">
-              Categories
-            </p>
-            <ul className="flex flex-col justify-center items-center sm:items-start">
-              {menuLinks.map((link: FooterLink) => (
-                <FooterLink key={link.id} {...link} />
-              ))}
-            </ul>
-          </div>
-          <div className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-3">
-            <p className="pt-2 pb-1 text-md font-medium font-logo">Legal</p>
-            <ul className="flex flex-col justify-center items-center sm:items-start">
-              {legalLinks.map((link: FooterLink) => (
-                <FooterLink key={link.id} {...link} />
-              ))}
-            </ul>
-          </div>
+          {footerColumns?.map((column) => (
+            <div
+              key={column.id}
+              className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-3"
+            >
+              <p className="pt-2 pb-1 text-md font-medium font-logo">
+                {column.title}
+              </p>
+              <ul className="flex flex-col justify-center items-center sm:items-start">
+                {column.columnLinks.map((link: FooterLink) => (
+                  <FooterLink key={link.id} {...link} />
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         <div className="pt-4">
           <p>
-            <strong>Disclaimer:</strong>
+            <strong>{disclaimer.title}</strong>
           </p>
           <p className="mt-2">
-            <i>
-              These products are not intended to diagnose, treat, cure or
-              prevent any disease. All information presented here is not meant
-              as a substitute for or alternative to information from healthcare
-              practitioners. Please consult your healthcare professional about
-              potential interactions or other possible complications before
-              using any product. Effects & Medical Attributes are based on
-              anecdotal evidence. Individual experiences can be varied.
-            </i>
+            <i>{disclaimer.description}</i>
           </p>
           <div className="grid justify-center pt-6 lg:justify-between">
             <div className="flex">
