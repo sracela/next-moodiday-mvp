@@ -164,7 +164,7 @@ export default function Footer({
                     key={link.id}
                     rel="noopener noreferrer"
                     href={link.url}
-                    title={link.text}
+                    title={link.label}
                     target={link.newTab ? "_blank" : "_self"}
                     className="flex items-center justify-center w-10 h-10 rounded-full"
                   >
