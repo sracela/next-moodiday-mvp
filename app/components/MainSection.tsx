@@ -34,7 +34,7 @@ export default async function MainSection({
 }: Props) {
   return (
     <>
-      <div className="text-center">
+      <div className="container mx-auto text-center">
         {title && <h1 className="main-heading">{title}</h1>}
         {description && <p className="main-subtitle">{description}</p>}
         {imageURL && (

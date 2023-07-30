@@ -63,12 +63,12 @@ export const FALLBACK_GLOBAL = {
           logoText: "moodi day",
         },
         menuLinks: [
-          {
-            id: 1,
-            text: "Home",
-            url: "/",
-            newTab: false,
-          },
+          // {
+          //   id: 1,
+          //   text: "Home",
+          //   url: "/",
+          //   newTab: false,
+          // },
           {
             id: 2,
             text: "Products",
