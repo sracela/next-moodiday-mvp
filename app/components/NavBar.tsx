@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useScroll } from "../hooks";
 import { SearchBox } from "react-instantsearch-hooks-web";
+import React from "react";
 
 interface NavLink {
   id: number;
@@ -33,6 +34,28 @@ function NavLink({ url, text }: NavLink) {
   );
 }
 
+function NavMenuMobile({ links }: { links: Array<NavLink> }) {
+  const path = usePathname();
+  return (
+    <div className="mobileMenu p-8 shadow-md">
+      <ul className="flex flex-col space-y-4">
+        {links.map(({ id, url, text }) => (
+          <li key={id} className={`flex`}>
+            <Link
+              href={url}
+              className={`flex hover:text-black ${
+                path === url ? "text-black" : "text-black-500"
+              }`}
+            >
+              {text}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Navbar({
   links,
   logoUrl,
@@ -42,6 +65,7 @@ export default function Navbar({
   logoUrl: string | null;
   logoText: string | null;
 }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const isScrolling = useScroll();
 
   return (
@@ -65,7 +89,7 @@ export default function Navbar({
           </ul>
         </div>
 
-        <div className="searchBox">
+        <div className="searchBox hidden sm:flex">
           <SearchBox
             placeholder="Search for products"
             classNames={{
@@ -98,22 +122,46 @@ export default function Navbar({
           />
         </div>
 
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6"
+        <div className="p-4 pr-0 flex gap-x-1 lg:hidden">
+          <button className="px-1 sm:hidden cursor-pointer">
+            <Image
+              src={"/icon-search-header.svg"}
+              alt="reset search"
+              width={16}
+              height={16}
+            />
+          </button>
+          <button
+            className="px-1 cursor-pointer"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
+            {isMobileMenuOpen ? (
+              <Image
+                src={"/cross.png"}
+                alt="reset search"
+                width={24}
+                height={24}
+                style={{ padding: "4px" }}
+              />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            )}
+          </button>
+        </div>
+        {isMobileMenuOpen && <NavMenuMobile links={links} />}
       </div>
     </div>
   );

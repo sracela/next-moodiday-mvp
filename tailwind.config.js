@@ -20,6 +20,7 @@ module.exports = {
         'gray': '#8492a6',
         'gray-light': '#d3dce6',
         'black-200': 'rgba(0, 0, 0, 0.2)',
+        'black-500': 'rgba(0, 0, 0, 0.5)',
         'transparent': 'transparent',
         primary: 'var(--default-btn-bg)',
       }

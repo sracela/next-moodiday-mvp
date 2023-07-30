@@ -354,7 +354,6 @@ article {
 
 .searchBox {
   flex: 1;
-  display: flex;
   justify-content: end;
   align-items: center;
   margin-left: 8px;
@@ -420,4 +419,14 @@ input[type="search"]::-webkit-search-results-decoration {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  width: 100vw;
+  background-color: white;
+  z-index: 10;
+  min-height: 30vh;
 }
