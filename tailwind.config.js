@@ -7,20 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "1rem",
-          md: "2rem",
-        },
-      },
-    },
-    screens: {
-      sm: "640px",
-      md: "768px",
-      lg: "1024px",
-      xl: "1280px",
-    },
+      colors: {
+        'white': '#fff',
+        'black': '#000',
+        'blue': '#1fb6ff',
+        'purple': '#7e5bef',
+        'pink': '#ff49db',
+        'orange': '#ff7849',
+        'green': '#13ce66',
+        'yellow': '#ffc82c',
+        'gray-dark': '#273444',
+        'gray': '#8492a6',
+        'gray-light': '#d3dce6',
+        'black-200': 'rgba(0, 0, 0, 0.2)',
+        'transparent': 'transparent',
+        primary: 'var(--default-btn-bg)',
+      }
+    }
+
   },
   variants: {
     extend: {},

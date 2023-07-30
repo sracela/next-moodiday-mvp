@@ -5,6 +5,7 @@ import { fetchAPI } from "./utils/fetch-api";
 import Navbar from "./components/NavBar";
 import { FALLBACK_GLOBAL, FALLBACK_SEO } from "./utils/constants";
 import Footer from "./components/Footer";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -80,22 +81,26 @@ export default function RootLayout({
     <html lang="en">
       {/* <body className={inter.className}> */}
       <body>
-        <Navbar
-          links={navbar.links}
-          logoUrl={navbarLogoUrl}
-          logoText={navbar.navbarLogo.logoText}
-        />
+        <Providers>
+          <Navbar
+            links={navbar.links}
+            logoUrl={navbarLogoUrl}
+            logoText={navbar.navbarLogo.logoText}
+          />
 
-        <main className="min-h-screen overflow-x-hidden px-2">{children}</main>
+          <main className="min-h-screen overflow-x-hidden px-2">
+            {children}
+          </main>
 
-        <Footer
-          logoUrl={footerLogoUrl}
-          logoText={footer.footerLogo.logoText}
-          menuLinks={footer.menuLinks}
-          budtenderNetworkyLinks={footer.budtenderNetworkyLinks.data}
-          legalLinks={footer.legalLinks}
-          socialLinks={footer.socialLinks}
-        />
+          <Footer
+            logoUrl={footerLogoUrl}
+            logoText={footer.footerLogo.logoText}
+            menuLinks={footer.menuLinks}
+            budtenderNetworkyLinks={footer.budtenderNetworkyLinks.data}
+            legalLinks={footer.legalLinks}
+            socialLinks={footer.socialLinks}
+          />
+        </Providers>
       </body>
     </html>
   );

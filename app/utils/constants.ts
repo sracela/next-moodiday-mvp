@@ -9,12 +9,12 @@ export const FALLBACK_GLOBAL = {
     attributes: {
       navbar: {
         links: [
-          {
-            id: 1,
-            text: "Home",
-            url: "/",
-            newTab: false,
-          },
+          // {
+          //   id: 1,
+          //   text: "Home",
+          //   url: "/",
+          //   newTab: false,
+          // },
           {
             id: 2,
             text: "Products",

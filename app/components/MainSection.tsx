@@ -16,13 +16,17 @@ type Page = {
 };
 
 type Props = {
-  imageURL?: string;
   page: Page;
+  pageSlug: string;
+  title?: string;
+  description?: string;
+  imageURL?: string;
   videoData?: any;
-  pageSlug?: string;
 };
 
 export default async function MainSection({
+  title,
+  description,
   imageURL,
   page,
   videoData,
@@ -31,6 +35,8 @@ export default async function MainSection({
   return (
     <>
       <div className="text-center">
+        {title && <h1 className="main-heading">{title}</h1>}
+        {description && <p className="main-subtitle">{description}</p>}
         {imageURL && (
           <Image
             src={imageURL}
@@ -44,7 +50,9 @@ export default async function MainSection({
       <div className="flex flex-col py-2 gap-6">
         {page.data.map((section: any) => (
           <div key={section.id}>
-            <h2 className="py-2">{section.attributes.category_name}</h2>
+            <h2 className="py-2 section-heading">
+              {section.attributes.category_name}
+            </h2>
             <div className="flex flex-row gap-3 py-3 overflow-x-auto">
               {section.attributes.video_details.data.map((video: any) => {
                 const videoPopulated = videoData.find(

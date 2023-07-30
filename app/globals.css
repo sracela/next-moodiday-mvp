@@ -23,6 +23,7 @@
   --default-btn-bg: #FFCB64;
   --disable-btn-bg-rgb: 217, 217, 217;
   --disable-btn-bg: #D9D9D9;
+  --hover-btn-bg-rgb: 49, 49, 49, 0.1;
   --input-border-color-rgb: 230, 230, 230;
   --input-border-color: #E6E6E6;
   --icon-size-1x: 14px;
@@ -46,7 +47,7 @@
 } */
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   color: var(--body-font-color);
   font-size: var(--fontSize-1x);
@@ -85,6 +86,14 @@ article {
   font-family: 'DM Sans', sans-serif;
 }
 
+.font-logo {
+  font-family: var(--logo-font);
+}
+
+.section-heading {
+  font-family: var(--logo-font);
+  font-size: var(--fontSize-3x);
+}
 
 .main-heading {
   font-family: 'Poppins', sans-serif;
@@ -329,4 +338,86 @@ article {
   margin-bottom: 1rem;
   margin-top: 0;
   font-weight: 400;
+}
+
+.navlink {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  padding: 4px 16px !important;
+  font-size: 14px;
+  color: var(--body-font-color);
+  text-decoration: none;
+  border-radius: 15px;
+  transition: background-color .1s ease-in-out;
+}
+
+.searchBox {
+  flex: 1;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-left: 8px;
+  min-width: 200px;
+  max-width: 300px;
+  width: auto;
+}
+
+.searchBox>div {
+  width: 100%;
+  height: min-content;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 5px 16px !important;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0px 24px;
+}
+
+.clearBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.navSearch {
+  all: unset;
+  max-width: 300px;
+  width: auto;
+}
+
+.searchBtn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

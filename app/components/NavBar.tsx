@@ -1,9 +1,10 @@
 "use client";
 import Logo from "./Logo";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { useScroll } from "../hooks";
+import { SearchBox } from "react-instantsearch-hooks-web";
 
 interface NavLink {
   id: number;
@@ -16,12 +17,14 @@ function NavLink({ url, text }: NavLink) {
   const path = usePathname();
 
   return (
-    <li className="flex">
+    <li className={`flex`}>
       <Link
         href={url}
-        className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
-        }}`}
+        className={`flex items-center border border-solid border-black-200 navlink ${
+          path === url
+            ? "bg-primary border-transparent hover:bg-primary"
+            : "transparent"
+        }`}
         prefetch={true}
       >
         {text}
@@ -49,7 +52,9 @@ export default function Navbar({
     >
       <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>
-          {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
+          {logoText && (
+            <h2 className="text-2xl font-bold whitespace-nowrap">{logoText}</h2>
+          )}
         </Logo>
 
         <div className="items-center flex-shrink-0 hidden lg:flex">
@@ -58,6 +63,39 @@ export default function Navbar({
               <NavLink key={item.id} {...item} />
             ))}
           </ul>
+        </div>
+
+        <div className="searchBox">
+          <SearchBox
+            placeholder="Search for products"
+            classNames={{
+              input: "navSearch",
+              submit: "searchBtn",
+              reset: "clearBtn",
+              form: "searchForm",
+            }}
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log("submit");
+            }}
+            searchAsYouType={false}
+            submitIconComponent={() => (
+              <Image
+                src={"/icon-search-header.svg"}
+                alt="reset search"
+                width={14}
+                height={14}
+              />
+            )}
+            resetIconComponent={() => (
+              <Image
+                src={"/cross.png"}
+                alt="reset search"
+                width={10}
+                height={10}
+              />
+            )}
+          />
         </div>
 
         <button className="p-4 lg:hidden">
