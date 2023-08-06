@@ -48,9 +48,10 @@ const getImageURL = (slug: string) => {
 export default async function PageRoute({ params }: Props) {
   const { slug } = params;
   const pageSlug = slug[0];
-  const videoSlug = slug[1];
+  const videoSlug = slug[2];
   const { pageData: page, videoData } = await getPageBySlug(pageSlug);
   if (page.data.length === 0) return null;
+  const video = await getVideoDataBySlug(videoSlug);
 
   //   const contentSections = page.data[0].attributes.contentSections;
   //   return contentSections.map((section: any, index: number) =>
@@ -65,7 +66,7 @@ export default async function PageRoute({ params }: Props) {
         videoData={videoData}
         pageSlug={pageSlug}
       />
-      <Modal pageSlug={pageSlug} videoSlug={videoSlug} />
+      <Modal pageSlug={pageSlug} video={video} />
     </>
   );
 }

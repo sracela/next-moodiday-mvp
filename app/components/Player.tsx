@@ -36,6 +36,7 @@ export default function Player({
         video_id: videoId ?? "NO_ID",
         video_title: videoName ?? "title not available",
       }}
+      style={{ aspectRatio: 9 / 16, height: "100%" }}
     />
   );
 }

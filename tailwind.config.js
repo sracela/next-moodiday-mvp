@@ -19,6 +19,7 @@ module.exports = {
         'gray-dark': '#273444',
         'gray': '#8492a6',
         'gray-light': '#d3dce6',
+        'background-overflow': 'hsla(0,0%,60%,.47)',
         'black-200': 'rgba(0, 0, 0, 0.2)',
         'black-500': 'rgba(0, 0, 0, 0.5)',
         'transparent': 'transparent',
