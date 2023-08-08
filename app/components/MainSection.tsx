@@ -66,7 +66,7 @@ export default async function MainSection({
                     key={video.id}
                     href={`/${pageSlug !== "Home" ? pageSlug : "home"}/video/${
                       video.attributes.slug
-                    }`}
+                    }?autoplay=true&mute=false`}
                     prefetch={true}
                   >
                     <div className="flex flex-col items-start justify-between gap-2">

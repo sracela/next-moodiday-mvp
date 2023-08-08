@@ -4,6 +4,7 @@ import Player from "./Player";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { MdClose } from "react-icons/md";
+import { useSearchParams } from "next/navigation";
 
 export default function Modal({
   pageSlug,
@@ -15,6 +16,11 @@ export default function Modal({
   //   const videoThumbnail =
   //     video?.attributes?.thumbnail?.data?.attributes?.url ??
   //     `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+
+  // check if url query has muted and autoplay
+  const searchPatams = useSearchParams();
+  const muted = searchPatams.get("muted") === "true";
+  const autoplay = searchPatams.get("autoplay") === "true";
 
   useEffect(() => {
     if (!video || !video?.[0]) return;
@@ -44,6 +50,8 @@ export default function Modal({
                 }
                 videoName={video[0].attributes?.video_name}
                 videoId={video[0].id}
+                muted={muted}
+                autoplay={autoplay}
               />
             </section>
             <section className="description-wrapper">
@@ -52,11 +60,11 @@ export default function Modal({
               </ReactMarkdown>
             </section>
           </article>
-          <button className="close-btn">
-            <Link href={`/${pageSlug !== "Home" ? pageSlug : ""}`}>
+          <Link href={`/${pageSlug !== "Home" ? pageSlug : ""}`}>
+            <button className="close-btn">
               <MdClose size={20} />
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

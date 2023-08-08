@@ -186,6 +186,7 @@ article {
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
+    border-radius: 0px;
   }
 
 }
@@ -234,6 +235,7 @@ article {
 
   @media only screen and (max-width: 600px) {
     width: 100%;
+    margin-bottom: 24px;
   }
 
   >p:first-of-type {

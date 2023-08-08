@@ -33,7 +33,7 @@ export function useDevice() {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
-  const isMobile = width ? width <= 1400 : null;
+  const isMobile = width ? width <= 720 : null;
 
   return { isMobile };
 }
