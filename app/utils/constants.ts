@@ -234,5 +234,21 @@ export const MASTER_TAGS_CONTENT = {
         },
       },
     },
+    {
+      id: "4",
+      attributes: {
+        name: "Home",
+        slug: "home",
+        title: "Community-Powered Cannabis",
+        description: "Verified reviews from real buds, not bots",
+        image: {
+          data: {
+            attributes: {
+              url: "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/6d480ac8ea78b7e9615c40ce306f41dd.png",
+            },
+          },
+        },
+      },
+    },
   ],
 };

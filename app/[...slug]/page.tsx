@@ -39,10 +39,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const getImageURL = (slug: string) => {
+  if (slug === "home")
+    return "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/e5bb3bc88700d2d11fe403cba149ae0a.svg";
   const pageData = MASTER_TAGS_CONTENT.data.find(
     (d: any) => d.attributes.slug === slug
   );
   return pageData?.attributes.image.data.attributes.url;
+};
+
+const getTitleAndDescription = (slug: string) => {
+  const pageData = MASTER_TAGS_CONTENT.data.find(
+    (d: any) => d.attributes.slug === slug
+  );
+  const { title, description } = pageData?.attributes as any;
+  return { title: title || null, description: description || null };
 };
 
 export default async function PageRoute({ params }: Props) {
@@ -52,6 +62,7 @@ export default async function PageRoute({ params }: Props) {
   const { pageData: page, videoData } = await getPageBySlug(pageSlug);
   if (page.data.length === 0) return null;
   const video = await getVideoDataBySlug(videoSlug);
+  const { title, description } = getTitleAndDescription(pageSlug);
 
   //   const contentSections = page.data[0].attributes.contentSections;
   //   return contentSections.map((section: any, index: number) =>
@@ -62,6 +73,8 @@ export default async function PageRoute({ params }: Props) {
     <>
       <MainSection
         page={page}
+        title={title}
+        description={description}
         imageURL={getImageURL(pageSlug)}
         videoData={videoData}
         pageSlug={pageSlug}
