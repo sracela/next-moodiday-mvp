@@ -72,6 +72,10 @@ main {
   flex-direction: column;
   margin: 0 auto;
   padding: 24px 64px;
+
+  @media screen and (max-width: 600px) {
+    padding: 8px 24px;
+  }
 }
 
 
@@ -396,6 +400,7 @@ article {
   text-decoration: none;
   border-radius: 15px;
   transition: background-color .1s ease-in-out;
+  white-space: nowrap
 }
 
 .searchBox {

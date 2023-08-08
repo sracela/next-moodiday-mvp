@@ -65,7 +65,6 @@ export default function Navbar({
   logoUrl: string | null;
   logoText: string | null;
 }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const isScrolling = useScroll();
 
   return (
@@ -89,7 +88,7 @@ export default function Navbar({
           </ul>
         </div>
 
-        <div className="searchBox hidden sm:flex">
+        <div className="searchBox flex">
           <SearchBox
             placeholder="Search for products"
             classNames={{
@@ -122,7 +121,7 @@ export default function Navbar({
           />
         </div>
 
-        <div className="p-4 pr-0 flex gap-x-1 lg:hidden">
+        {/* <div className="p-4 pr-0 flex gap-x-1 lg:hidden">
           <button className="px-1 sm:hidden cursor-pointer">
             <Image
               src={"/icon-search-header.svg"}
@@ -160,8 +159,15 @@ export default function Navbar({
               </svg>
             )}
           </button>
-        </div>
-        {isMobileMenuOpen && <NavMenuMobile links={links} />}
+        </div> */}
+        {/* {isMobileMenuOpen && <NavMenuMobile links={links} />} */}
+      </div>
+      <div className="overflow-x-auto pb-4 container px-0 mx-auto items-center flex lg:hidden">
+        <ul className="items-stretch flex space-x-3 mx-auto text-center lg:hidden">
+          {links.map((item: NavLink) => (
+            <NavLink key={item.id} {...item} />
+          ))}
+        </ul>
       </div>
     </div>
   );
