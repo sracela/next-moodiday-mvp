@@ -74,7 +74,9 @@ export default async function PageRoute({ params }: Props) {
       <MainSection
         page={page}
         title={title}
-        description={description}
+        description={
+          pageSlug === "home" || pageSlug === "" ? description : null
+        }
         imageURL={getImageURL(pageSlug)}
         videoData={videoData}
         pageSlug={pageSlug}
