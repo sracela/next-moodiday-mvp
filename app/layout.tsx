@@ -6,6 +6,7 @@ import Navbar from "./components/NavBar";
 import { FALLBACK_SEO } from "./utils/constants";
 import Footer from "./components/Footer";
 import { Providers } from "./providers";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -88,6 +89,10 @@ export default async function RootLayout({
             disclaimer={footer.disclaimer}
           />
         </Providers>
+        <Script
+          src="https://js.hsforms.net/forms/embed/v2.js"
+          id="form-script"
+        />
       </body>
     </html>
   );

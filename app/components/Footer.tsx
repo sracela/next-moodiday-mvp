@@ -2,16 +2,13 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "./Logo";
-import { CgWebsite } from "react-icons/cg";
-import { FaDiscord } from "react-icons/fa";
 import {
   AiFillTwitterCircle,
-  AiFillYoutube,
   AiFillInstagram,
   AiFillFacebook,
 } from "react-icons/ai";
-import { useEffect } from "react";
 import React from "react";
+import HubspotContactForm from "./HubspotFooterForm";
 
 interface FooterLink {
   id: number;
@@ -85,25 +82,6 @@ export default function Footer({
   externalImage?: ExternalImage;
   disclaimer: Disclaimer;
 }) {
-  const formRef = React.useRef<HTMLDivElement>(null);
-  const script = document.createElement("script");
-  script.src = "https://js.hsforms.net/forms/embed/v2.js";
-  script.id = "form-script";
-
-  useEffect(() => {
-    if (!formRef.current) return;
-    if (document.querySelector("#form-script")) return;
-    document.querySelector("#hbspt")?.appendChild(script);
-    script.addEventListener("load", () => {
-      // @ts-ignore
-      window.hbspt.forms.create({
-        region: "na1",
-        portalId: "22398621",
-        formId: "2d92060c-cd73-42e2-b932-942b5cfda52d",
-      });
-    });
-  }, [formRef.current]);
-
   return (
     <footer className="py-6">
       <div className="container px-6 mx-auto space-y-6  md:space-y-12">
@@ -113,8 +91,7 @@ export default function Footer({
               {footerForm?.title}
             </h1>
             <p>{footerForm?.description}</p>
-
-            <div id="hbspt" ref={formRef} className="pt-5" />
+            <HubspotContactForm />
           </div>
           <div className="col-span-6 pl-8 hidden md:flex">
             <video width="100%" controls autoPlay={true} playsInline muted loop>
