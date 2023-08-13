@@ -198,6 +198,15 @@ article {
     border-radius: 0px;
   }
 
+  /* For iPhone Xs Max, and iPhone 11 Pro Max: */
+  @media only screen and (width: 414px) and (height: 896px) and (-webkit-device-pixel-ratio: 3) {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    border-radius: 0px;
+  }
+
 }
 
 .modal-box-inner {
