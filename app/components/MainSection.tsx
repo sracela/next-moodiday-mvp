@@ -17,11 +17,11 @@ type Page = {
 
 type Props = {
   page: Page;
-  pageSlug: string;
   title?: string;
   description?: string;
   imageURL?: string;
   videoData?: any;
+  getVideoURL: () => string;
 };
 
 export default async function MainSection({
@@ -29,8 +29,7 @@ export default async function MainSection({
   description,
   imageURL,
   page,
-  videoData,
-  pageSlug,
+  getVideoURL,
 }: Props) {
   return (
     <>
@@ -55,16 +54,13 @@ export default async function MainSection({
             </h2>
             <div className="flex flex-row gap-3 py-3 overflow-x-auto">
               {section.attributes.video_details.data.map((video: any) => {
-                const videoPopulated = videoData.find(
-                  (v: any) => v.id === video.id
-                );
                 const videoThumbnail =
-                  videoPopulated.attributes.thumbnail?.data?.attributes?.url ??
-                  `https://image.mux.com/${videoPopulated?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+                  video.attributes.thumbnail?.data?.attributes?.url ??
+                  `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
                 return (
                   <Link
                     key={video.id}
-                    href={`/${pageSlug !== "Home" ? pageSlug : "home"}/video/${
+                    href={`/${getVideoURL()}/video/${
                       video.attributes.slug
                     }?autoplay=true&mute=false`}
                     prefetch={true}

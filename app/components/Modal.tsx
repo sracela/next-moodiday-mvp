@@ -4,23 +4,21 @@ import Player from "./Player";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { MdClose } from "react-icons/md";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
-export default function Modal({
-  pageSlug,
-  video,
-}: {
-  pageSlug: string;
-  video: any;
-}) {
-  //   const videoThumbnail =
-  //     video?.attributes?.thumbnail?.data?.attributes?.url ??
-  //     `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+export default function Modal({ video, slug }: { video: any; slug: string[] }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const muted = searchParams.get("muted") === "true";
+  const autoplay = searchParams.get("autoplay") === "true";
 
-  // check if url query has muted and autoplay
-  const searchPatams = useSearchParams();
-  const muted = searchPatams.get("muted") === "true";
-  const autoplay = searchPatams.get("autoplay") === "true";
+  const getBackURL = () => {
+    if (slug[0] === "home") return "";
+    if (pathname.split("/")[1] === "review") {
+      return "review/" + slug[0];
+    }
+    return slug[0];
+  };
 
   useEffect(() => {
     if (!video || !video?.[0]) return;
@@ -60,7 +58,7 @@ export default function Modal({
               </ReactMarkdown>
             </section>
           </article>
-          <Link href={`/${pageSlug !== "Home" ? pageSlug : ""}`}>
+          <Link href={`/${getBackURL()}`}>
             <button className="close-btn">
               <MdClose size={20} />
             </button>

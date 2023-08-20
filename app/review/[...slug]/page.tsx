@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { getPageBySlug, getVideoDataBySlug } from "@/app/utils/api";
-import { getMetaFromMasterTag, getMetaFromVideo } from "../utils/metadata";
-import MainSection from "../components/MainSection";
-import { MASTER_TAGS_CONTENT } from "../utils/constants";
-import Modal from "../components/Modal";
+import { getMetaFromMasterTag, getMetaFromVideo } from "../../utils/metadata";
+import MainSection from "../../components/MainSection";
+import { MASTER_TAGS_CONTENT } from "../../utils/constants";
+import Modal from "../../components/Modal";
 import Image from "next/image";
 
 type Props = {
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pageSlug = slug[0];
   const videoSlug = slug[2];
 
+  //todo check
   if (videoSlug) {
     const videoInfo = await getVideoDataBySlug(videoSlug, false);
 
@@ -39,8 +40,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const getImageURL = (slug: string) => {
-  if (slug === "home")
-    return "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/e5bb3bc88700d2d11fe403cba149ae0a.svg";
   const pageData = MASTER_TAGS_CONTENT.data.find(
     (d: any) => d.attributes.slug === slug
   );
@@ -62,16 +61,17 @@ export default async function PageRoute({ params }: Props) {
   const pageSlug = slug[0];
   const videoSlug = slug[2];
   const { pageData: page } = await getPageBySlug(pageSlug);
-  //   const contentSections = page.data[0].attributes.contentSections;
-  //   return contentSections.map((section: any, index: number) =>
-  //     sectionRenderer(section, index)
-  //   );
   const { title, description } = getTitleAndDescription(pageSlug);
 
   if (!page || page.data.length === 0) return null;
 
+  //   const contentSections = page.data[0].attributes.contentSections;
+  //   return contentSections.map((section: any, index: number) =>
+  //     sectionRenderer(section, index)
+  //   );
+
   const getVideoURL = () => {
-    return pageSlug;
+    return "review/" + pageSlug;
   };
 
   if (!videoSlug) {
@@ -89,15 +89,11 @@ export default async function PageRoute({ params }: Props) {
   }
 
   const video = await getVideoDataBySlug(videoSlug);
-
   return (
     <>
       <MainSection
         page={page}
         title={title}
-        description={
-          pageSlug === "home" || pageSlug === "" ? description : null
-        }
         imageURL={getImageURL(pageSlug)}
         getVideoURL={getVideoURL}
       />

@@ -99,7 +99,6 @@ export default function Navbar({
             }}
             onSubmit={(event) => {
               event.preventDefault();
-              console.log("submit");
             }}
             searchAsYouType={false}
             submitIconComponent={() => (

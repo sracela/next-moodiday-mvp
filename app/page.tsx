@@ -5,8 +5,8 @@ import MainSection from "./components/MainSection";
 
 export default async function Home() {
   const slug = "Home";
-  const { pageData: homePage, videoData } = await getPageBySlug(slug);
-  if (homePage.data.length === 0) return null;
+  const { pageData: homePage } = await getPageBySlug(slug);
+  if (!homePage || homePage.data.length === 0) return null;
   return (
     <>
       <MainSection
@@ -16,8 +16,7 @@ export default async function Home() {
         imageURL={
           "https://moodiday.nyc3.digitaloceanspaces.com/moodiday/e5bb3bc88700d2d11fe403cba149ae0a.svg"
         }
-        videoData={videoData}
-        pageSlug={slug}
+        getVideoURL={() => "home"}
       />
     </>
   );
