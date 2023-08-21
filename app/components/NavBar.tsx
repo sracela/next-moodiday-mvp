@@ -71,7 +71,7 @@ export default function Navbar({
     <div
       className={`bg-white px-4 py-2 sticky top-0 ${
         isScrolling ? "shadow-md" : ""
-      }`}
+      } z-50`}
     >
       <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>

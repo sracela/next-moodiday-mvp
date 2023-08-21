@@ -78,7 +78,6 @@ export default async function RootLayout({
           <main className="container mx-auto min-h-screen overflow-x-hidden px-6">
             {children}
           </main>
-
           <Footer
             logoUrl={footer.footerLogo.logoImg}
             logoText={footer.footerLogo.logoText}

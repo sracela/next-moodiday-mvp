@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import VideoCarousel from "./VideoCarousel";
 
 type VideoDetails = {
   video_id: string;
@@ -48,11 +49,47 @@ export default async function MainSection({
       </div>
       <div className="flex flex-col py-2 gap-6">
         {page.data.map((section: any) => (
-          <div key={section.id}>
+          <div key={section.id} className="sm:px-12 px-4">
             <h2 className="py-2 section-heading">
               {section.attributes.category_name}
             </h2>
-            <div className="flex flex-row gap-3 py-3 overflow-x-auto">
+            <div className="pt-2">
+              <VideoCarousel>
+                {section.attributes.video_details.data.map((video: any) => {
+                  const videoThumbnail =
+                    video.attributes.thumbnail?.data?.attributes?.url ??
+                    `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+                  return (
+                    <Link
+                      key={video.id}
+                      href={`/${getVideoURL()}/video/${
+                        video.attributes.slug
+                      }?autoplay=true&mute=false`}
+                    >
+                      <div className="flex flex-col items-start justify-between gap-2">
+                        <div
+                          style={{
+                            width: "max-content",
+                          }}
+                        >
+                          <Image
+                            src={videoThumbnail}
+                            alt={video?.title}
+                            className="thumbnail-image"
+                            width={165}
+                            height={273}
+                          />
+                        </div>
+                        <p className="video-name">
+                          {video.attributes.video_name}
+                        </p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </VideoCarousel>
+            </div>
+            {/* <div className="flex flex-row gap-3 py-3 overflow-x-auto js-disabled">
               {section.attributes.video_details.data.map((video: any) => {
                 const videoThumbnail =
                   video.attributes.thumbnail?.data?.attributes?.url ??
@@ -63,7 +100,6 @@ export default async function MainSection({
                     href={`/${getVideoURL()}/video/${
                       video.attributes.slug
                     }?autoplay=true&mute=false`}
-                    prefetch={true}
                   >
                     <div className="flex flex-col items-start justify-between gap-2">
                       <div
@@ -84,7 +120,7 @@ export default async function MainSection({
                   </Link>
                 );
               })}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
