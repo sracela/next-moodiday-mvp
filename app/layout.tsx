@@ -11,13 +11,12 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 async function getGlobal(): Promise<any> {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-
-  if (!token)
-    throw new Error("The Strapi API Token environment variable is not set.");
+  // const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+  // if (!token)
+  //   throw new Error("The Strapi API Token environment variable is not set.");
+  // const options = { headers: { Authorization: `Bearer ${token}` } };
 
   const path = `/global`;
-  const options = { headers: { Authorization: `Bearer ${token}` } };
 
   const urlParamsObject = {
     populate: [
@@ -34,7 +33,7 @@ async function getGlobal(): Promise<any> {
       "footer.socialLinks",
     ],
   };
-  return await fetchAPI(path, urlParamsObject, options);
+  return await fetchAPI(path, urlParamsObject, {});
 }
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -20,8 +20,8 @@ export const getTags = (slug?: string) => {
 };
 
 export async function getPageBySlug(slug?: string) {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-  const options = { headers: { Authorization: `Bearer ${token}` } };
+  // const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+  // const options = { headers: { Authorization: `Bearer ${token}` } };
   const path = "/rel-mas-tag-cats";
   const urlParamsObject: any = {
     filters: {
@@ -46,7 +46,7 @@ export async function getPageBySlug(slug?: string) {
       },
     },
   };
-  const data = await fetchAPI(path, urlParamsObject, options);
+  const data = await fetchAPI(path, urlParamsObject, {});
 
   return { pageData: data.data[0].attributes.master_categories };
 }
