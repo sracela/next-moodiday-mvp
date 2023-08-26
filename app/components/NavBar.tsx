@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useScroll } from "../hooks";
 import { SearchBox } from "react-instantsearch-hooks-web";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface NavLink {
   id: number;
@@ -66,6 +67,7 @@ export default function Navbar({
   logoText: string | null;
 }) {
   const isScrolling = useScroll();
+  const router = useRouter();
 
   return (
     <div
@@ -97,8 +99,14 @@ export default function Navbar({
               reset: "clearBtn",
               form: "searchForm",
             }}
-            onSubmit={(event) => {
+            //navigate to search page
+            onSubmit={(event: any) => {
               event.preventDefault();
+
+              const searchQuery = event.target[0].value;
+              if (searchQuery) {
+                router.push(`/search/${searchQuery}`);
+              }
             }}
             searchAsYouType={false}
             submitIconComponent={() => (

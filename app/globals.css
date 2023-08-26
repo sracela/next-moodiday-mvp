@@ -521,3 +521,13 @@ input[type="search"]::-webkit-search-results-decoration {
 .slick-next {
   top: 40% !important;
 }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  grid-auto-rows: minmax(100px, auto);
+  grid-gap: 24px;
+  width: 100%;
+  height: auto;
+  background-color: inherit;
+}

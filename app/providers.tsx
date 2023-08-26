@@ -1,7 +1,7 @@
 "use client";
 
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
-import { InstantSearch } from "react-instantsearch-hooks-web";
+import { Configure, InstantSearch } from "react-instantsearch-hooks-web";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const searchClient = instantMeiliSearch(
@@ -14,6 +14,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       indexName="video-detail"
       routing={false}
     >
+      <Configure hitsPerPage={18} />
       {children}
     </InstantSearch>
   );

@@ -31,7 +31,7 @@ export default function Modal({ video, slug }: { video: any; slug: string[] }) {
   if (!video || !video?.[0]) return null;
 
   return (
-    <div className="fixed z-10 inset-0 min-h-screen overflow-y-auto">
+    <div className="fixed z-50 inset-0 min-h-screen overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen relative">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-background-overflow opacity-75"></div>
