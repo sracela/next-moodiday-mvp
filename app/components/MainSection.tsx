@@ -49,7 +49,7 @@ export default async function MainSection({
       </div>
       <div className="flex flex-col py-2 gap-6">
         {page.data.map((section: any) => (
-          <div key={section.id} className="sm:px-12 px-4">
+          <div key={section.id} className="px-4">
             <h2 className="py-2 section-heading">
               {section.attributes.category_name}
             </h2>

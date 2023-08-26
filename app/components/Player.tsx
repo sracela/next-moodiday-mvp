@@ -21,7 +21,6 @@ export default function Player({
   autoplay,
 }: PlayerProps) {
   const ref = React.useRef<any>(null);
-  const { isMobile } = useDevice();
 
   const onLoaded = () => {
     if (ref.current) {

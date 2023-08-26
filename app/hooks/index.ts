@@ -34,7 +34,7 @@ export function useDevice() {
     };
   }, []);
   const isMobile = width ? width <= 720 : null;
-  const isSmallDevice = width ? width <= 540 : null;
+  const isSmallDevice = width ? width <= 600 : null;
 
   return { isMobile, isSmallDevice };
 }
