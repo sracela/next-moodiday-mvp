@@ -120,7 +120,7 @@ export default function PageRoute({ params }: Props) {
                 return (
                   <Link
                     key={video.id}
-                    href={`/video/${video.slug}`}
+                    href={`/search/${indexUiState.query}/video/${video.slug}`}
                     className="flex flex-col"
                   >
                     <div className="flex flex-col items-start justify-between gap-2">

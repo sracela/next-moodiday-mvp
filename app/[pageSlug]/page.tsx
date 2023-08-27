@@ -9,7 +9,7 @@ import Image from "next/image";
 type Props = {
   params: {
     // lang: string,
-    slug: Array<string>;
+    pageSlug: string;
   };
 };
 
@@ -18,22 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   //   if (!page || !page.data[0].attributes?.seo) return FALLBACK_SEO;
   //   const metadata = page.data[0].attributes.seo;
 
-  const { slug } = params;
-  const pageSlug = slug[0];
-  const videoSlug = slug[2];
-
-  if (videoSlug) {
-    const videoInfo = await getVideoDataBySlug(videoSlug, false);
-
-    const videoMetadata = getMetaFromVideo(
-      videoInfo?.attributes?.video_name || videoSlug,
-      pageSlug
-    );
-    return {
-      title: videoMetadata.title,
-      description: videoMetadata.description,
-    };
-  }
+  const { pageSlug } = params;
 
   return getMetaFromMasterTag(pageSlug);
 }
@@ -58,14 +43,8 @@ const getTitleAndDescription = (slug: string) => {
 };
 
 export default async function PageRoute({ params }: Props) {
-  const { slug } = params;
-  const pageSlug = slug[0];
-  const videoSlug = slug[2];
+  const { pageSlug } = params;
   const { pageData: page } = await getPageBySlug(pageSlug);
-  //   const contentSections = page.data[0].attributes.contentSections;
-  //   return contentSections.map((section: any, index: number) =>
-  //     sectionRenderer(section, index)
-  //   );
   const { title, description } = getTitleAndDescription(pageSlug);
 
   if (!page || page.data.length === 0) return null;
@@ -74,34 +53,13 @@ export default async function PageRoute({ params }: Props) {
     return pageSlug;
   };
 
-  if (!videoSlug) {
-    return (
-      <MainSection
-        page={page}
-        title={title}
-        description={
-          pageSlug === "home" || pageSlug === "" ? description : null
-        }
-        imageURL={getImageURL(pageSlug)}
-        getVideoURL={getVideoURL}
-      />
-    );
-  }
-
-  const video = await getVideoDataBySlug(videoSlug);
-
   return (
-    <>
-      <MainSection
-        page={page}
-        title={title}
-        description={
-          pageSlug === "home" || pageSlug === "" ? description : null
-        }
-        imageURL={getImageURL(pageSlug)}
-        getVideoURL={getVideoURL}
-      />
-      <Modal video={video} slug={slug} />
-    </>
+    <MainSection
+      page={page}
+      title={title}
+      description={pageSlug === "home" || pageSlug === "" ? description : null}
+      imageURL={getImageURL(pageSlug)}
+      getVideoURL={getVideoURL}
+    />
   );
 }

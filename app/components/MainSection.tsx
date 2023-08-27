@@ -32,6 +32,7 @@ export default async function MainSection({
   page,
   getVideoURL,
 }: Props) {
+  console.log("**************page", getVideoURL());
   return (
     <>
       <div className="text-center">
@@ -65,6 +66,9 @@ export default async function MainSection({
                       href={`/${getVideoURL()}/video/${
                         video.attributes.slug
                       }?autoplay=true&mute=false`}
+                      // href={
+                      //   "/products/video/1906-chill-drops-vanessa-d?autoplay=true&mute=false"
+                      // }
                     >
                       <div className="flex flex-col items-start justify-between gap-2">
                         <div

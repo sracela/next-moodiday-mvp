@@ -3,13 +3,12 @@ import React, { useCallback, useEffect, useState } from "react";
 // @ts-ignore: Unreachable code error
 import MuxPlayer from "@mux/mux-player-react/lazy";
 import { useDevice } from "../hooks";
+import { useSearchParams } from "next/navigation";
 
 type PlayerProps = {
   playbackId: string;
   videoName: string;
   videoId: string;
-  muted?: boolean;
-  autoplay?: boolean;
   //   onLoaded: () => void;
 };
 
@@ -17,9 +16,10 @@ export default function Player({
   playbackId,
   videoName,
   videoId,
-  muted,
-  autoplay,
 }: PlayerProps) {
+  const searchParams = useSearchParams();
+  const muted = searchParams.get("muted") === "true";
+  const autoplay = searchParams.get("autoplay") === "true";
   const ref = React.useRef<any>(null);
 
   const onLoaded = () => {
