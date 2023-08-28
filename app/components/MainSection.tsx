@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import VideoCarousel from "./VideoCarousel";
+import Badge from "./Badge";
 
 type VideoDetails = {
   video_id: string;
@@ -32,7 +33,6 @@ export default async function MainSection({
   page,
   getVideoURL,
 }: Props) {
-  console.log("**************page", getVideoURL());
   return (
     <>
       <div className="text-center">
@@ -60,25 +60,27 @@ export default async function MainSection({
                   const videoThumbnail =
                     video.attributes.thumbnail?.data?.attributes?.url ??
                     `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+
                   return (
                     <Link
                       key={video.id}
                       href={`/${getVideoURL()}/video/${
                         video.attributes.slug
                       }?autoplay=true&mute=false`}
-                      // href={
-                      //   "/products/video/1906-chill-drops-vanessa-d?autoplay=true&mute=false"
-                      // }
                     >
                       <div className="flex flex-col items-start justify-between gap-2">
                         <div
                           style={{
                             width: "max-content",
+                            position: "relative",
                           }}
                         >
+                          {video.attributes.subcategories && (
+                            <Badge tag={video.attributes.subcategories} />
+                          )}
                           <Image
                             src={videoThumbnail}
-                            alt={video?.title}
+                            alt={video?.attributes.video_name}
                             className="thumbnail-image"
                             width={165}
                             height={273}
