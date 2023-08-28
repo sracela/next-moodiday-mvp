@@ -547,3 +547,51 @@ input[type="search"]::-webkit-search-results-decoration {
   border-radius: 7px;
   text-align: center;
 }
+
+
+.loading {
+  width: 165px;
+  cursor: pointer;
+  border-radius: 15px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loading .image,
+.loading .h4,
+.loading .description {
+  background-color: #ededed;
+  background: linear-gradient(100deg,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 60%) #ededed;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1s loading ease-in-out infinite;
+}
+
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}
+
+.loading .h4 {
+  min-height: 1.6rem;
+  border-radius: 4px;
+  animation-delay: 0.05s;
+}
+
+.loading .description {
+  min-height: 4rem;
+  border-radius: 4px;
+  animation-delay: 0.06s;
+}
+
+.loading .image {
+  border-radius: 15px;
+  animation-delay: 0.07s;
+  height: 260px;
+}

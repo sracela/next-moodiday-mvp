@@ -6,7 +6,7 @@ export default function PageLayout({
   parallel: React.ReactNode;
 }) {
   return (
-    <section className="min-h-screen">
+    <section>
       {children}
       {parallel}
     </section>

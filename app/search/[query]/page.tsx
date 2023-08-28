@@ -67,7 +67,6 @@ export default function PageRoute({ params }: Props) {
   // const { pageData: page } = await getPageBySlug(pageSlug);
   // const { title, description } = getTitleAndDescription(pageSlug);
   const getVideos = async (hits: any) => {
-    console.log({ hits });
     const videos = await Promise.all(
       hits.map(async (hit: any) => {
         const video = await getVideoDataBySlug(hit.slug, true);
@@ -140,7 +139,7 @@ export default function PageRoute({ params }: Props) {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center self-end">
         <button
           className={`bg-black text-white px-4 py-2 rounded-lg ${
             isLastPage ? "opacity-50 cursor-not-allowed" : ""

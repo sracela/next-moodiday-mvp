@@ -10,13 +10,14 @@ import { useRouter } from "next/navigation";
 import { useSsrProvider } from "../providers";
 
 interface NavLink {
-  id: number;
+  id?: number;
   url: string;
-  newTab: boolean;
+  newTab?: boolean;
   label: string;
+  active?: boolean;
 }
 
-function NavLink({ url, label }: NavLink) {
+export function NavLink({ url, label, active }: NavLink) {
   const path = usePathname();
 
   return (
@@ -24,7 +25,7 @@ function NavLink({ url, label }: NavLink) {
       <Link
         href={url}
         className={`flex items-center border border-solid border-black-200 navlink ${
-          path === url
+          path === url || active
             ? "bg-primary border-transparent hover:bg-primary"
             : "transparent"
         }`}

@@ -19,6 +19,53 @@ export const getTags = (slug?: string) => {
   return slug;
 };
 
+export async function getVideosByMasterCatergory(mc: string) {
+  // const path = "/master-categories";
+  // const urlParamsObject: any = {
+  //   filters: {
+  //     category_name: {
+  //       $eq: mc,
+  //     },
+  //   },
+  //   populate: {
+  //     video_details: {
+  //       populate: {
+  //         mux_video: true,
+  //         thumbnail: {
+  //           fields: ["url"],
+  //         },
+  //       },
+  //     },
+  //   },
+  // };
+  // const data = await fetchAPI(path, urlParamsObject, {});
+
+  // return data[0].video_details;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/get/video_mc`,
+    {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mastercategories: mc }),
+    }
+  )
+    .then((res) => res.json())
+    .then((res) => res)
+    .catch((err) => {
+      throw err;
+    });
+
+  const videos = response.data;
+  const populatedVideos = await Promise.all(
+    videos.map(async (video: any) => {
+      const videoData = await getVideoDataBySlug(video.slug, true);
+      return videoData[0];
+    })
+  );
+  return populatedVideos;
+}
+
 export async function getPageBySlug(slug?: string) {
   // const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   // const options = { headers: { Authorization: `Bearer ${token}` } };

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import VideoCarousel from "./VideoCarousel";
 import Badge from "./Badge";
+import { NavLink } from "./NavBar";
 
 type VideoDetails = {
   video_id: string;
@@ -50,10 +51,17 @@ export default async function MainSection({
       </div>
       <div className="flex flex-col py-2 gap-6">
         {page.data.map((section: any) => (
-          <div key={section.id} className="px-4">
+          <div key={section.id} className="px-4 flex flex-col">
             <h2 className="py-2 section-heading">
               {section.attributes.category_name}
             </h2>
+            <div className="w-full flex justify-end pr-12 pb-2">
+              <NavLink
+                label="View All"
+                url={`/viewAll/${section.attributes.category_name}`}
+                active
+              />
+            </div>
             <div className="pt-2">
               <VideoCarousel>
                 {section.attributes.video_details.data.map((video: any) => {
