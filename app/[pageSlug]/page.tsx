@@ -1,10 +1,8 @@
 import { Metadata } from "next";
-import { getPageBySlug, getVideoDataBySlug } from "@/app/utils/api";
-import { getMetaFromMasterTag, getMetaFromVideo } from "../utils/metadata";
+import { getPageBySlug } from "@/app/utils/api";
+import { getMetaFromMasterTag } from "../utils/metadata";
 import MainSection from "../components/MainSection";
 import { MASTER_TAGS_CONTENT } from "../utils/constants";
-import Modal from "../components/Modal";
-import Image from "next/image";
 
 type Props = {
   params: {

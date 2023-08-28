@@ -7,6 +7,7 @@ import { useScroll } from "../hooks";
 import { SearchBox } from "react-instantsearch-hooks-web";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useSsrProvider } from "../providers";
 
 interface NavLink {
   id: number;
@@ -66,6 +67,7 @@ export default function Navbar({
   logoUrl: string | null;
   logoText: string | null;
 }) {
+  const hasMounted = useSsrProvider();
   const isScrolling = useScroll();
   const router = useRouter();
 
@@ -90,43 +92,45 @@ export default function Navbar({
           </ul>
         </div>
 
-        <div className="searchBox flex">
-          <SearchBox
-            placeholder="Search for products"
-            classNames={{
-              input: "navSearch",
-              submit: "searchBtn",
-              reset: "clearBtn",
-              form: "searchForm",
-            }}
-            //navigate to search page
-            onSubmit={(event: any) => {
-              event.preventDefault();
+        {hasMounted && (
+          <div className="searchBox flex">
+            <SearchBox
+              placeholder="Search for products"
+              classNames={{
+                input: "navSearch",
+                submit: "searchBtn",
+                reset: "clearBtn",
+                form: "searchForm",
+              }}
+              //navigate to search page
+              onSubmit={(event: any) => {
+                event.preventDefault();
 
-              const searchQuery = event.target[0].value;
-              if (searchQuery) {
-                router.push(`/search/${searchQuery}`);
-              }
-            }}
-            searchAsYouType={false}
-            submitIconComponent={() => (
-              <Image
-                src={"/icon-search-header.svg"}
-                alt="reset search"
-                width={14}
-                height={14}
-              />
-            )}
-            resetIconComponent={() => (
-              <Image
-                src={"/cross.png"}
-                alt="reset search"
-                width={10}
-                height={10}
-              />
-            )}
-          />
-        </div>
+                const searchQuery = event.target[0].value;
+                if (searchQuery) {
+                  router.push(`/search/${searchQuery}`);
+                }
+              }}
+              searchAsYouType={false}
+              submitIconComponent={() => (
+                <Image
+                  src={"/icon-search-header.svg"}
+                  alt="reset search"
+                  width={14}
+                  height={14}
+                />
+              )}
+              resetIconComponent={() => (
+                <Image
+                  src={"/cross.png"}
+                  alt="reset search"
+                  width={10}
+                  height={10}
+                />
+              )}
+            />
+          </div>
+        )}
 
         {/* <div className="p-4 pr-0 flex gap-x-1 lg:hidden">
           <button className="px-1 sm:hidden cursor-pointer">
