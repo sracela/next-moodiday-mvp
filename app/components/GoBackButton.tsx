@@ -1,13 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { MdClose } from "react-icons/md";
+import { MdArrowBack } from "react-icons/md";
 
 export default function GoBackButton() {
   const router = useRouter();
   return (
-    <button className="close-btn" onClick={router.back}>
-      <MdClose size={20} />
+    <button className="goback-btn" onClick={router.back}>
+      <MdArrowBack size={20} /> Go back
     </button>
   );
 }

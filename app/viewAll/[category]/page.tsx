@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getMetaFromMasterTag } from "../../utils/metadata";
 import Image from "next/image";
 import Badge from "../../components/Badge";
+import GoBackButton from "../../components/GoBackButton";
 
 type Props = {
   params: {
@@ -40,7 +41,8 @@ export default async function PageRoute({ params }: Props) {
 
   return (
     <div className="flex flex-col py-2 gap-6">
-      <div className="px-4">
+      <div className="px-4 relative">
+        <GoBackButton />
         <h2 className="py-2 section-heading">{decodeURI(category)}</h2>
         <div className="pt-2">
           <div className="py-2 video-grid">

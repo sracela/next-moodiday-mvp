@@ -1,7 +1,7 @@
 import React from "react";
 import Player from "./Player";
 import ReactMarkdown from "react-markdown";
-import GoBackButton from "./GoBackButton";
+import CloseModalButton from "./CloseModalButton";
 import RemoveScrollComponent from "./RemoveScrollComponent";
 
 export default function Modal({ video }: { video: any }) {
@@ -34,7 +34,7 @@ export default function Modal({ video }: { video: any }) {
               </section>
             </article>
           )}
-          <GoBackButton />
+          <CloseModalButton />
         </div>
       </div>
       <RemoveScrollComponent />

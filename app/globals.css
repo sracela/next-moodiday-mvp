@@ -280,6 +280,20 @@ article {
   }
 }
 
+.goback-btn {
+  display: flex;
+  gap: 8px;
+  z-index: 11;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #f3f3f4D1;
+
+  &:hover {
+    background-color: #e3e3e4;
+  }
+}
+
+
 .heading {
   font-family: var(--logo-font);
   font-size: 40px;
