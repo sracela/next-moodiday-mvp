@@ -9,6 +9,7 @@ import {
 } from "react-icons/ai";
 import React from "react";
 import HubspotContactForm from "./HubspotFooterForm";
+import { useDevice } from "../hooks";
 
 interface FooterLink {
   id: number;
@@ -82,10 +83,11 @@ export default function Footer({
   externalImage?: ExternalImage;
   disclaimer: Disclaimer;
 }) {
+  const { isSmallDevice } = useDevice();
   return (
     <footer className="py-6">
       <div className="container px-6 mx-auto space-y-6  md:space-y-12">
-        <div className="pt-4 grid grid-cols-12">
+        {/* <div className="pt-4 grid grid-cols-12">
           <div className="col-span-12 md:col-span-6">
             <h1 className="pt-2 pb-1 text-lg font-medium font-logo">
               {footerForm?.title}
@@ -98,29 +100,81 @@ export default function Footer({
               <source src={externalImage?.src} type="video/mp4" />
             </video>
           </div>
-        </div>
+        </div> */}
         <div className="pt-4 grid grid-cols-12">
-          <div className="pb-6 col-span-12 text-center flex items-start justify-center sm:-ml-2 sm:justify-start md:pb-0 md:col-span-3 ">
+          {/* <div className="pb-6 col-span-12 text-center flex items-start justify-center sm:-ml-2 sm:justify-start md:pb-0 md:col-span-3 ">
             <Logo src={logoUrl}>
               {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
             </Logo>
+          </div> */}
+          <div className="col-span-12 md:col-span-5">
+            <h1 className="pt-2 pb-1 text-lg font-medium font-logo">
+              {footerForm?.title}
+            </h1>
+            <p>{footerForm?.description}</p>
+            <HubspotContactForm />
           </div>
-          {footerColumns?.map((column) => (
-            <div
-              key={column.id}
-              className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-3"
-            >
+          <div className="col-span-12 md:col-span-1"></div>
+          {footerColumns
+            ?.filter((c) => c.title !== "Categories")
+            .map((column) => (
+              <div
+                key={column.id}
+                className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-2"
+              >
+                <p className="pt-2 pb-1 text-md font-medium font-logo">
+                  {column.title}
+                </p>
+                <ul className="flex flex-col justify-center items-center sm:items-start">
+                  {column.columnLinks.map((link: FooterLink) => (
+                    <FooterLink key={link.id} {...link} />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          {!isSmallDevice && (
+            <div className="col-span-12 text-center pb-4 sm:pb-0 sm:text-left sm:col-span-4 md:col-span-2">
               <p className="pt-2 pb-1 text-md font-medium font-logo">
-                {column.title}
+                Connect with us
               </p>
               <ul className="flex flex-col justify-center items-center sm:items-start">
-                {column.columnLinks.map((link: FooterLink) => (
-                  <FooterLink key={link.id} {...link} />
-                ))}
+                {socialLinks.map((link: any) => {
+                  return (
+                    <li key={link.id} className="flex text-center md:text-left">
+                      <a
+                        rel="noopener noreferrer"
+                        href={link.url}
+                        target={link.newTab ? "_blank" : "_self"}
+                        className={`flex justify-center items-center gap-2 hover:text-black text-black-500`}
+                      >
+                        <RenderSocialIcon social={link.social} /> {link.text}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
-          ))}
+          )}
         </div>
+        {isSmallDevice && (
+          <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
+            {socialLinks.map((link: FooterLink) => {
+              return (
+                <a
+                  key={link.id}
+                  rel="noopener noreferrer"
+                  href={link.url}
+                  title={link.label}
+                  target={link.newTab ? "_blank" : "_self"}
+                  className="flex items-center justify-center w-10 h-10 rounded-full"
+                >
+                  <RenderSocialIcon social={link.social} />
+                </a>
+              );
+            })}
+          </div>
+        )}
+
         <div className="pt-4">
           <p>
             <strong>{disclaimer.title}</strong>
@@ -134,22 +188,24 @@ export default function Footer({
                 ©{new Date().getFullYear()} Moodi Day, All rights reserved
               </span>
             </div>
-            <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
-              {socialLinks.map((link: FooterLink) => {
-                return (
-                  <a
-                    key={link.id}
-                    rel="noopener noreferrer"
-                    href={link.url}
-                    title={link.label}
-                    target={link.newTab ? "_blank" : "_self"}
-                    className="flex items-center justify-center w-10 h-10 rounded-full"
-                  >
-                    <RenderSocialIcon social={link.social} />
-                  </a>
-                );
-              })}
-            </div>
+            {isSmallDevice && (
+              <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
+                {socialLinks.map((link: FooterLink) => {
+                  return (
+                    <a
+                      key={link.id}
+                      rel="noopener noreferrer"
+                      href={link.url}
+                      title={link.label}
+                      target={link.newTab ? "_blank" : "_self"}
+                      className="flex items-center justify-center w-10 h-10 rounded-full"
+                    >
+                      <RenderSocialIcon social={link.social} />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
