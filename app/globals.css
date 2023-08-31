@@ -368,13 +368,15 @@ article {
   border-radius: 10px;
   width: 66.66666667%;
   overflow: hidden;
+  overflow-y: hidden;
 }
 
 .creatorPortalForm>iframe {
   min-width: 100%;
   max-width: 100%;
-  height: 886px;
+  min-height: 886px !important;
   border: none;
+  overflow-y: hidden;
 }
 
 .creatorLinkWrapper {
