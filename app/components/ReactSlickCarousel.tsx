@@ -22,12 +22,12 @@ function CustomArrow(props: CustomArrowProps) {
   const getStyles = () => {
     if (slideCount && offset && type === "next") {
       return {
-        opacity: currentSlide === slideCount - offset ? 0 : 1,
+        opacity: currentSlide === slideCount - offset ? 0.25 : 1,
         cursor: currentSlide === slideCount - offset ? "default" : "pointer",
       };
     } else {
       return {
-        opacity: currentSlide === 0 ? 0 : 1,
+        opacity: currentSlide === 0 ? 0.25 : 1,
         cursor: currentSlide === 0 ? "default" : "pointer",
       };
     }
@@ -40,6 +40,7 @@ function CustomArrow(props: CustomArrowProps) {
         ...style,
         opacity: getStyles().opacity,
         cursor: getStyles().cursor,
+        marginLeft: type === "next" ? 0 : "-1rem",
       }}
       onClick={onClick}
     >
@@ -68,9 +69,9 @@ export default function ReactSlickCarousel({
       } else if (window.innerWidth >= 1280) {
         setOffset(5);
       } else if (window.innerWidth >= 1024) {
-        setOffset(4);
-      } else if (window.innerWidth >= 760) {
         setOffset(3);
+      } else if (window.innerWidth >= 760) {
+        setOffset(2);
       } else if (window.innerWidth >= 540) {
         setOffset(2);
       } else {
@@ -100,15 +101,15 @@ export default function ReactSlickCarousel({
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToShow: 3,
+        slidesToScroll: 3,
       },
     },
     {
       breakpoint: 760,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        slidesToScroll: 2,
       },
     },
     {
