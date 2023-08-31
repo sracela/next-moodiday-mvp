@@ -6,7 +6,7 @@ import BrowseByStateCarousel from "./BrowseByStateCarousel";
 export default function BrowseByStateSection({ states }: { states: any }) {
   return (
     <div className="px-4 flex flex-col">
-      <h2 className="py-2 section-heading">Browse By State</h2>
+      <h2 className="py-2 section-heading">Browse products by state</h2>
       <div className="pt-2 pb-14">
         <BrowseByStateCarousel>
           {states.map((state: any) => {

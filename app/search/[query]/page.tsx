@@ -83,7 +83,7 @@ export default function PageRoute({ params }: Props) {
         };
       })
     );
-
+    console.log({ videos });
     setVideos([...videos]);
   };
 
@@ -117,6 +117,7 @@ export default function PageRoute({ params }: Props) {
           <div className="pt-2">
             <div className="py-2 video-grid">
               {videos.map((video: any) => {
+                if (!video) return;
                 return (
                   <Link
                     key={video.id}
