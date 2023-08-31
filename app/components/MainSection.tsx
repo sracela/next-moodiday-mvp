@@ -4,6 +4,7 @@ import VideoCarousel from "./VideoCarousel";
 import Badge from "./Badge";
 import { NavLink } from "./NavBar";
 import BrowseByStateSection from "./BrowseByStateSection";
+import BrowseByBrandSection from "./BrowseByBrandSection";
 
 type VideoDetails = {
   video_id: string;
@@ -37,6 +38,7 @@ type Props = {
   page: Page;
   pageConfig?: PageConfig;
   states?: any;
+  brands?: any;
   title?: string;
   description?: string;
   imageURL?: string;
@@ -51,6 +53,7 @@ export default async function MainSection({
   page,
   pageConfig,
   states,
+  brands,
   getVideoURL,
 }: Props) {
   return (
@@ -73,12 +76,18 @@ export default async function MainSection({
         {page.data.map((section: any, index: number) => {
           const browseByStatePosition =
             pageConfig?.data?.attributes?.quick_pic_position || null;
+
+          const browseByBrandPosition =
+            pageConfig?.data?.attributes?.brand_carousel_position || null;
           return (
             <>
-              {browseByStatePosition !== null &&
-                browseByStatePosition - 1 === index && (
-                  <BrowseByStateSection states={states} />
-                )}
+              {browseByStatePosition && browseByStatePosition - 1 === index && (
+                <BrowseByStateSection states={states} />
+              )}
+
+              {browseByBrandPosition && browseByBrandPosition - 1 === index && (
+                <BrowseByBrandSection brands={brands} />
+              )}
               <div key={section.id} className="px-4 flex flex-col">
                 <h2 className="py-2 section-heading">
                   {section.attributes.category_name}

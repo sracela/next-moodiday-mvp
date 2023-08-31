@@ -19,6 +19,14 @@ export const getTags = (slug?: string) => {
   return slug;
 };
 
+export async function getBrands() {
+  const path = "/brands?sort=order";
+  const urlParamsObject: any = {};
+  const data = await fetchAPI(path, urlParamsObject, {});
+
+  return data.data;
+}
+
 export async function getStates() {
   const path = "/master-categories";
   const urlParamsObject: any = {

@@ -14,6 +14,7 @@ type CustomArrowProps = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   currentSlide?: number;
   offset?: number;
+  infinite?: boolean;
 };
 
 export function CustomDot(props: any) {
@@ -29,9 +30,23 @@ export function CustomDot(props: any) {
 }
 
 export function CustomArrow(props: CustomArrowProps) {
-  const { className, style, onClick, type, currentSlide, slideCount, offset } =
-    props;
+  const {
+    className,
+    style,
+    onClick,
+    type,
+    currentSlide,
+    slideCount,
+    offset,
+    infinite,
+  } = props;
   const getStyles = () => {
+    if (infinite) {
+      return {
+        opacity: 1,
+        cursor: "pointer",
+      };
+    }
     if (slideCount && offset && type === "next") {
       return {
         opacity: currentSlide === slideCount - offset ? 0.25 : 1,

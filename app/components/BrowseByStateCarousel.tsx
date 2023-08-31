@@ -13,8 +13,12 @@ import ReactSlickCarousel, {
 } from "./ReactSlickCarousel";
 
 export default function BrowseByStateCarousel({
+  autoplay = false,
+  infinite = false,
   children,
 }: {
+  autoplay?: boolean;
+  infinite?: boolean;
   children: React.ReactNode;
 }) {
   const { isSmallDevice } = useDevice();
@@ -84,14 +88,16 @@ export default function BrowseByStateCarousel({
   var settings = useMemo(
     () => ({
       dots: true,
-      infinite: false,
+      infinite,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
       draggable: false,
-      nextArrow: <CustomArrow type="next" offset={offset} />,
-      prevArrow: <CustomArrow type="prev" />,
+      nextArrow: <CustomArrow type="next" offset={offset} infinite />,
+      prevArrow: <CustomArrow type="prev" infinite />,
       responsive,
+      autoplay,
+      autoplaySpeed: 3000,
     }),
     [offset]
   );

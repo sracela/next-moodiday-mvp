@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getPageBySlug, getStates } from "@/app/utils/api";
+import { getBrands, getPageBySlug, getStates } from "@/app/utils/api";
 import { getMetaFromMasterTag } from "../utils/metadata";
 import MainSection from "../components/MainSection";
 import { MASTER_TAGS_CONTENT } from "../utils/constants";
@@ -44,6 +44,7 @@ export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
   const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
   const states = await getStates();
+  const brands = await getBrands();
   const { title, description } = getTitleAndDescription(pageSlug);
 
   if (!page || page.data.length === 0) return null;
@@ -57,6 +58,7 @@ export default async function PageRoute({ params }: Props) {
       page={page}
       pageConfig={pageConfig}
       states={states}
+      brands={brands}
       title={title}
       description={pageSlug === "home" || pageSlug === "" ? description : null}
       imageURL={getImageURL(pageSlug)}
