@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getPageBySlug } from "@/app/utils/api";
+import { getPageBySlug, getStates } from "@/app/utils/api";
 import { getMetaFromMasterTag } from "../utils/metadata";
 import MainSection from "../components/MainSection";
 import { MASTER_TAGS_CONTENT } from "../utils/constants";
@@ -42,7 +42,8 @@ const getTitleAndDescription = (slug: string) => {
 
 export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
-  const { pageData: page } = await getPageBySlug(pageSlug);
+  const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
+  const states = await getStates();
   const { title, description } = getTitleAndDescription(pageSlug);
 
   if (!page || page.data.length === 0) return null;
@@ -54,6 +55,8 @@ export default async function PageRoute({ params }: Props) {
   return (
     <MainSection
       page={page}
+      pageConfig={pageConfig}
+      states={states}
       title={title}
       description={pageSlug === "home" || pageSlug === "" ? description : null}
       imageURL={getImageURL(pageSlug)}

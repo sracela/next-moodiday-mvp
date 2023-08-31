@@ -19,6 +19,30 @@ export const getTags = (slug?: string) => {
   return slug;
 };
 
+export async function getStates() {
+  const path = "/master-categories";
+  const urlParamsObject: any = {
+    // filters: {
+    //   category_name: {
+    //     $eq: mc,
+    //   },
+    // },
+    // populate: {
+    //   video_details: {
+    //     populate: {
+    //       mux_video: true,
+    //       thumbnail: {
+    //         fields: ["url"],
+    //       },
+    //     },
+    //   },
+    // },
+  };
+  const data = await fetchAPI(path, urlParamsObject, {});
+
+  return data.data;
+}
+
 export async function getVideosByMasterCatergory(mc: string) {
   // const path = "/master-categories";
   // const urlParamsObject: any = {
@@ -79,6 +103,11 @@ export async function getPageBySlug(slug?: string) {
       },
     },
     populate: {
+      master_tag: {
+        populate: {
+          quick_pic_position: true,
+        },
+      },
       master_categories: {
         populate: {
           video_details: {
@@ -95,7 +124,10 @@ export async function getPageBySlug(slug?: string) {
   };
   const data = await fetchAPI(path, urlParamsObject, {});
 
-  return { pageData: data.data[0].attributes.master_categories };
+  return {
+    pageData: data.data[0].attributes.master_categories,
+    pageConfig: data.data[0].attributes.master_tag,
+  };
 }
 
 export async function getVideoDataBySlug(

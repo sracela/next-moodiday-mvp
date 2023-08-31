@@ -16,7 +16,19 @@ type CustomArrowProps = {
   offset?: number;
 };
 
-function CustomArrow(props: CustomArrowProps) {
+export function CustomDot(props: any) {
+  const { onClick, active } = props;
+  return (
+    <div
+      className={`${
+        active ? "bg-primary" : "bg-gray-300"
+      } h-2 w-2 rounded-full cursor-pointer`}
+      onClick={onClick}
+    />
+  );
+}
+
+export function CustomArrow(props: CustomArrowProps) {
   const { className, style, onClick, type, currentSlide, slideCount, offset } =
     props;
   const getStyles = () => {
@@ -55,86 +67,11 @@ function CustomArrow(props: CustomArrowProps) {
 }
 
 export default function ReactSlickCarousel({
+  settings,
   children,
 }: {
+  settings: any;
   children: React.ReactNode;
 }) {
-  const [offset, setOffset] = useState(1);
-
-  // compute offset depending on the number of slides to show according to the breakpoint
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setOffset(6);
-      } else if (window.innerWidth >= 1280) {
-        setOffset(5);
-      } else if (window.innerWidth >= 1024) {
-        setOffset(3);
-      } else if (window.innerWidth >= 760) {
-        setOffset(2);
-      } else if (window.innerWidth >= 540) {
-        setOffset(2);
-      } else {
-        setOffset(1);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const responsive = [
-    {
-      breakpoint: 1440,
-      settings: {
-        slidesToShow: 6,
-        slidesToScroll: 6,
-      },
-    },
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 5,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 760,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-  ];
-
-  var settings = useMemo(
-    () => ({
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 6,
-      slidesToScroll: 6,
-      draggable: false,
-      nextArrow: <CustomArrow type="next" offset={offset} />,
-      prevArrow: <CustomArrow type="prev" />,
-      responsive,
-    }),
-    [offset]
-  );
-
   return <Slider {...settings}>{children}</Slider>;
 }

@@ -139,7 +139,7 @@ article {
 .hero-image {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 15px;
   margin: 24px 0;
@@ -608,4 +608,15 @@ input[type="search"]::-webkit-search-results-decoration {
   border-radius: 15px;
   animation-delay: 0.07s;
   height: 260px;
+}
+
+.slick-dots button:before {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: 48px;
+  width: 48px;
+  margin-top: 2rem;
+  transform: scale(1.5);
+  line-height: normal;
 }

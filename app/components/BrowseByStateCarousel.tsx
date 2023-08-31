@@ -7,9 +7,12 @@ import React, {
   useState,
 } from "react";
 import { useDevice } from "../hooks";
-import ReactSlickCarousel, { CustomArrow } from "./ReactSlickCarousel";
+import ReactSlickCarousel, {
+  CustomArrow,
+  CustomDot,
+} from "./ReactSlickCarousel";
 
-export default function VideoCarousel({
+export default function BrowseByStateCarousel({
   children,
 }: {
   children: React.ReactNode;
@@ -22,11 +25,11 @@ export default function VideoCarousel({
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1440) {
-        setOffset(6);
+        setOffset(4);
       } else if (window.innerWidth >= 1280) {
-        setOffset(5);
-      } else if (window.innerWidth >= 1024) {
         setOffset(3);
+      } else if (window.innerWidth >= 1024) {
+        setOffset(2);
       } else if (window.innerWidth >= 760) {
         setOffset(2);
       } else if (window.innerWidth >= 540) {
@@ -44,22 +47,22 @@ export default function VideoCarousel({
     {
       breakpoint: 1440,
       settings: {
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToShow: 4,
+        slidesToScroll: 4,
       },
     },
     {
       breakpoint: 1280,
       settings: {
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 3,
+        slidesToScroll: 3,
       },
     },
     {
       breakpoint: 1024,
       settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: 2,
+        slidesToScroll: 2,
       },
     },
     {
@@ -80,11 +83,11 @@ export default function VideoCarousel({
 
   var settings = useMemo(
     () => ({
-      dots: false,
+      dots: true,
       infinite: false,
       speed: 500,
-      slidesToShow: 6,
-      slidesToScroll: 6,
+      slidesToShow: 4,
+      slidesToScroll: 4,
       draggable: false,
       nextArrow: <CustomArrow type="next" offset={offset} />,
       prevArrow: <CustomArrow type="prev" />,
