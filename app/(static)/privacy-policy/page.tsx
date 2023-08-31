@@ -1,6 +1,11 @@
-import Link from "next/link";
+import { Metadata } from "next";
 
-export default function NotFound() {
+export const metadata: Metadata = {
+  title: "Privacy Policy | Moodi Day",
+  description: "",
+};
+
+export default function Privacy() {
   return (
     <div className="flex flex-col w-full text-center termsOfUse mt-20">
       <h1>Privacy Policy</h1>
