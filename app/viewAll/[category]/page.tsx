@@ -3,6 +3,7 @@ import { getVideosByMasterCatergory } from "@/app/utils/api";
 import Link from "next/link";
 import { getMetaFromMasterTag } from "../../utils/metadata";
 import Image from "next/image";
+import Badge from "../../components/Badge";
 
 type Props = {
   params: {
@@ -54,7 +55,10 @@ export default async function PageRoute({ params }: Props) {
                   href={`/viewAll/${category}/video/${video.attributes.slug}`}
                   className="flex flex-col"
                 >
-                  <div className="flex flex-col items-start justify-between gap-2">
+                  <div className="flex flex-col items-start justify-between gap-2 relative">
+                    {video.attributes.subcategories && (
+                      <Badge tag={video.attributes.subcategories} />
+                    )}
                     <Image
                       src={videoThumbnail}
                       alt="video thumbnail"

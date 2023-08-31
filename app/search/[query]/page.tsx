@@ -8,7 +8,7 @@ import {
 } from "react-instantsearch-hooks-web";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { get } from "http";
+import Badge from "../../components/Badge";
 
 type Props = {
   params: {
@@ -79,10 +79,11 @@ export default function PageRoute({ params }: Props) {
           video_name: hit.video_name,
           slug: hit.slug,
           thumbnail: videoThumbnail,
+          subcategories: hit.subcategories,
         };
       })
     );
-    console.log({ videos });
+
     setVideos([...videos]);
   };
 
@@ -122,7 +123,10 @@ export default function PageRoute({ params }: Props) {
                     href={`/search/${indexUiState.query}/video/${video.slug}`}
                     className="flex flex-col"
                   >
-                    <div className="flex flex-col items-start justify-between gap-2">
+                    <div className="flex flex-col items-start justify-between gap-2 relative">
+                      {video.subcategories && (
+                        <Badge tag={video.subcategories} />
+                      )}
                       <Image
                         src={video.thumbnail}
                         alt="video thumbnail"

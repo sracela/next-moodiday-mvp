@@ -71,6 +71,20 @@ export default function Navbar({
   const hasMounted = useSsrProvider();
   const isScrolling = useScroll();
   const router = useRouter();
+  const path = usePathname();
+
+  React.useEffect(() => {
+    if (path.includes("search")) return;
+    const navSearch: HTMLButtonElement | null =
+      document.querySelector(".navSearch");
+    const clearButton: HTMLButtonElement | null =
+      document.querySelector(".clearBtn");
+    if (clearButton && navSearch) {
+      clearButton.click();
+      navSearch.value = "";
+      navSearch.blur();
+    }
+  }, [path]);
 
   return (
     <div
