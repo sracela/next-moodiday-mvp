@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect, useMemo, useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 
 import Image from "next/image";
@@ -13,7 +13,7 @@ type CustomArrowProps = {
   style?: React.CSSProperties;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   currentSlide?: number;
-  offset?: number;
+  offset?: number | null;
   infinite?: boolean;
 };
 

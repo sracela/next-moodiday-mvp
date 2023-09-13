@@ -1,11 +1,11 @@
 "use client";
+import React, { useEffect } from "react";
 import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useScroll } from "../hooks";
 import { SearchBox } from "react-instantsearch-hooks-web";
-import React from "react";
 import { useRouter } from "next/navigation";
 import { useSsrProvider } from "../providers";
 
@@ -73,7 +73,7 @@ export default function Navbar({
   const router = useRouter();
   const path = usePathname();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (path.includes("search")) return;
     const navSearch: HTMLButtonElement | null =
       document.querySelector(".navSearch");

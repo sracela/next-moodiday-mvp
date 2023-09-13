@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  use,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDevice } from "../hooks";
 import ReactSlickCarousel, {
   CustomArrow,

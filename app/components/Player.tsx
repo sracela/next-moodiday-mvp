@@ -1,9 +1,8 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
 // @ts-ignore: Unreachable code error
 import MuxPlayer from "@mux/mux-player-react/lazy";
-import { useDevice } from "../hooks";
 import { useSearchParams } from "next/navigation";
+import { useRef } from "react";
 
 type PlayerProps = {
   playbackId: string;
@@ -20,7 +19,7 @@ export default function Player({
   const searchParams = useSearchParams();
   const muted = searchParams.get("muted") === "true";
   const autoplay = searchParams.get("autoplay") === "true";
-  const ref = React.useRef<any>(null);
+  const ref = useRef<any>(null);
 
   const onLoaded = () => {
     if (ref.current) {
