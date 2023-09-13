@@ -38,26 +38,26 @@ export function Providers({ children }: { children: React.ReactNode }) {
     process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY
   );
 
-  const [hasMounted, setHasMounted] = useState(false);
+  // const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setHasMounted(true);
+  // }, []);
 
-  if (!hasMounted) {
-    return <SsrProvider hasMounted={false}>{children}</SsrProvider>;
-  }
+  // if (!hasMounted) {
+  //   return <SsrProvider hasMounted={false}>{children}</SsrProvider>;
+  // }
 
   return (
-    <SsrProvider hasMounted={true}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName="video-detail"
-        routing={false}
-      >
-        <Configure hitsPerPage={18} />
-        {children}
-      </InstantSearch>
-    </SsrProvider>
+    // <SsrProvider hasMounted={true}>
+    <InstantSearch
+      searchClient={searchClient}
+      indexName="video-detail"
+      routing={false}
+    >
+      <Configure hitsPerPage={18} />
+      {children}
+    </InstantSearch>
+    // </SsrProvider>
   );
 }
