@@ -1,7 +1,6 @@
 "use client";
-
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useLayoutEffect, useState } from "react";
 import { Configure, InstantSearch } from "react-instantsearch-hooks-web";
 
 const SsrProviderContext = createContext<boolean>(false);
@@ -32,15 +31,15 @@ export const useSsrProvider = () => {
   return context;
 };
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  const searchClient = instantMeiliSearch(
-    process.env.NEXT_PUBLIC_MEILISEARCH_HOST!,
-    process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY
-  );
+const searchClient = instantMeiliSearch(
+  process.env.NEXT_PUBLIC_MEILISEARCH_HOST!,
+  process.env.NEXT_PUBLIC_MEILISEARCH_API_KEY
+);
 
+export function Providers({ children }: { children: React.ReactNode }) {
   const [hasMounted, setHasMounted] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setHasMounted(true);
   }, []);
 
