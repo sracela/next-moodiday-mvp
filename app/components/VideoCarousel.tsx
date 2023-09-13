@@ -1,13 +1,49 @@
 "use client";
-import React, {
-  use,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState,
-} from "react";
-import { useDevice } from "../hooks";
+import { useEffect, useState } from "react";
 import ReactSlickCarousel, { CustomArrow } from "./ReactSlickCarousel";
+import { useDevice } from "../hooks";
+
+const responsive = [
+  {
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: 6,
+      slidesToScroll: 6,
+    },
+  },
+  {
+    breakpoint: 1280,
+    settings: {
+      slidesToShow: 5,
+      slidesToScroll: 5,
+    },
+  },
+  {
+    breakpoint: 1024,
+    settings: {
+      slidesToShow: 3,
+      slidesToScroll: 3,
+    },
+  },
+  {
+    breakpoint: 760,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 2,
+    },
+  },
+  {
+    breakpoint: 600,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 2,
+    },
+  },
+];
+
+const defaultSettings = {
+  responsive,
+};
 
 export default function VideoCarousel({
   children,
@@ -17,6 +53,7 @@ export default function VideoCarousel({
   const { isMobile } = useDevice();
 
   const [offset, setOffset] = useState<null | number>(null);
+  const [settings, setSettings] = useState<any>(defaultSettings);
 
   const handleResize = () => {
     if (window.innerWidth >= 1440) {
@@ -41,46 +78,8 @@ export default function VideoCarousel({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const responsive = [
-    {
-      breakpoint: 1440,
-      settings: {
-        slidesToShow: 6,
-        slidesToScroll: 6,
-      },
-    },
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 5,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 760,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-  ];
-
-  var settings = useMemo(
-    () => ({
+  useEffect(() => {
+    const JSSettings = {
       dots: false,
       infinite: false,
       speed: 500,
@@ -90,28 +89,19 @@ export default function VideoCarousel({
       nextArrow: <CustomArrow type="next" offset={offset} />,
       prevArrow: <CustomArrow type="prev" />,
       responsive,
-    }),
-    [offset]
-  );
-  // search in a useEffect all the elements with classname js-disabled and set them to display: none
-  // useLayoutEffect(() => {
-  //   const elements = document.getElementsByClassName("js-disabled");
-  //   for (let i = 0; i < elements.length; i++) {
-  //     elements[i].setAttribute("style", "display: none");
-  //   }
-  // }, []);
+    };
+    setSettings({ ...JSSettings });
+  }, [offset]);
 
-  if (!offset) return null;
-
-  if (!isMobile) {
+  if (isMobile) {
     return (
-      <ReactSlickCarousel settings={settings}>{children}</ReactSlickCarousel>
+      <div className="flex flex-row gap-3 py-3 overflow-x-auto hidescroll">
+        {children}
+      </div>
     );
   }
 
   return (
-    <div className="flex flex-row gap-3 py-3 overflow-x-auto hidescroll">
-      {children}
-    </div>
+    <ReactSlickCarousel settings={settings}>{children}</ReactSlickCarousel>
   );
 }

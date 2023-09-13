@@ -6,6 +6,48 @@ import ReactSlickCarousel, {
   CustomDot,
 } from "./ReactSlickCarousel";
 
+const responsive = [
+  {
+    breakpoint: 1440,
+    settings: {
+      slidesToShow: 4,
+      slidesToScroll: 4,
+    },
+  },
+  {
+    breakpoint: 1280,
+    settings: {
+      slidesToShow: 3,
+      slidesToScroll: 3,
+    },
+  },
+  {
+    breakpoint: 1024,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 2,
+    },
+  },
+  {
+    breakpoint: 760,
+    settings: {
+      slidesToShow: 2,
+      slidesToScroll: 2,
+    },
+  },
+  {
+    breakpoint: 600,
+    settings: {
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    },
+  },
+];
+
+const defaultSettings = {
+  responsive,
+};
+
 export default function BrowseByStateCarousel({
   autoplay = false,
   infinite = false,
@@ -18,6 +60,7 @@ export default function BrowseByStateCarousel({
   const { isSmallDevice } = useDevice();
 
   const [offset, setOffset] = useState<null | number>(null);
+  const [settings, setSettings] = useState<any>(defaultSettings);
 
   const handleResize = () => {
     if (window.innerWidth >= 1440) {
@@ -42,46 +85,8 @@ export default function BrowseByStateCarousel({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const responsive = [
-    {
-      breakpoint: 1440,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 4,
-      },
-    },
-    {
-      breakpoint: 1280,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-      },
-    },
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 760,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ];
-
-  var settings = useMemo(
-    () => ({
+  useEffect(() => {
+    const JSSettings = {
       dots: true,
       infinite,
       speed: 500,
@@ -93,18 +98,9 @@ export default function BrowseByStateCarousel({
       responsive,
       autoplay,
       autoplaySpeed: 3000,
-    }),
-    [offset]
-  );
-  // search in a useEffect all the elements with classname js-disabled and set them to display: none
-  // useLayoutEffect(() => {
-  //   const elements = document.getElementsByClassName("js-disabled");
-  //   for (let i = 0; i < elements.length; i++) {
-  //     elements[i].setAttribute("style", "display: none");
-  //   }
-  // }, []);
-
-  if (!offset) return null;
+    };
+    setSettings({ ...JSSettings });
+  }, [offset]);
 
   if (isSmallDevice) {
     return (

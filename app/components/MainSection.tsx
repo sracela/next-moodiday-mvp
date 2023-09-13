@@ -107,12 +107,13 @@ export default async function MainSection({
                         `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
 
                       return (
-                        <Link
-                          key={video.id}
-                          href={`/${getVideoURL()}/video/${
-                            video.attributes.slug
-                          }?autoplay=true&mute=false`}
-                        >
+                        // <Link
+                        //   key={video.id}
+                        //   href={`/${getVideoURL()}/video/${
+                        //     video.attributes.slug
+                        //   }?autoplay=true&mute=false`}
+                        // >
+                        <div key={video.id}>
                           <div className="flex flex-col items-start justify-between gap-2">
                             <div
                               style={{
@@ -123,55 +124,40 @@ export default async function MainSection({
                               {video.attributes.subcategories && (
                                 <Badge tag={video.attributes.subcategories} />
                               )}
-                              <Image
-                                src={videoThumbnail}
-                                alt={video?.attributes.video_name}
-                                className="thumbnail-image"
-                                width={165}
-                                height={273}
-                              />
+
+                              <Link
+                                key={video.id}
+                                href={`/${getVideoURL()}/video/${
+                                  video.attributes.slug
+                                }?autoplay=true&mute=false`}
+                              >
+                                <Image
+                                  src={videoThumbnail}
+                                  alt={video?.attributes.video_name}
+                                  className="thumbnail-image"
+                                  width={165}
+                                  height={273}
+                                />
+                              </Link>
                             </div>
-                            <p className="video-name">
-                              {video.attributes.video_name}
-                            </p>
+
+                            <div className="video-name">
+                              <Link
+                                key={video.id}
+                                href={`/${getVideoURL()}/video/${
+                                  video.attributes.slug
+                                }?autoplay=true&mute=false`}
+                              >
+                                {video.attributes.video_name}
+                              </Link>
+                            </div>
                           </div>
-                        </Link>
+                        </div>
+                        // </Link>
                       );
                     })}
                   </VideoCarousel>
                 </div>
-                {/* <div className="flex flex-row gap-3 py-3 overflow-x-auto js-disabled">
-              {section.attributes.video_details.data.map((video: any) => {
-                const videoThumbnail =
-                  video.attributes.thumbnail?.data?.attributes?.url ??
-                  `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
-                return (
-                  <Link
-                    key={video.id}
-                    href={`/${getVideoURL()}/video/${
-                      video.attributes.slug
-                    }?autoplay=true&mute=false`}
-                  >
-                    <div className="flex flex-col items-start justify-between gap-2">
-                      <div
-                        style={{
-                          width: "max-content",
-                        }}
-                      >
-                        <Image
-                          src={videoThumbnail}
-                          alt={video?.title}
-                          className="thumbnail-image"
-                          width={165}
-                          height={273}
-                        />
-                      </div>
-                      <p>{video.attributes.video_name}</p>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div> */}
               </div>
             </>
           );
