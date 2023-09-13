@@ -28,11 +28,13 @@ export function useDevice() {
     setWidth(window.innerWidth);
   }
   useEffect(() => {
+    handleWindowSizeChange();
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
+
   const isMobile = width ? width <= 720 : null;
   const isSmallDevice = width ? width <= 600 : null;
 

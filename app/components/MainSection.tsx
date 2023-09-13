@@ -72,7 +72,7 @@ export default async function MainSection({
           />
         )}
       </div>
-      <div className="flex flex-col py-2 gap-6 px-8">
+      <div className="flex flex-col py-2 gap-6 sm:px-8">
         {page.data.map((section: any, index: number) => {
           const browseByStatePosition =
             pageConfig?.data?.attributes?.quick_pic_position || null;
@@ -88,11 +88,11 @@ export default async function MainSection({
               {browseByBrandPosition && browseByBrandPosition - 1 === index && (
                 <BrowseByBrandSection brands={brands} />
               )}
-              <div key={section.id} className="px-4 flex flex-col">
+              <div key={section.id} className="px-2 flex flex-col">
                 <h2 className="py-2 section-heading">
                   {section.attributes.category_name}
                 </h2>
-                <div className="w-full flex justify-end pr-12 pb-2">
+                <div className="w-full flex justify-end sm:pr-12 sm:pb-2">
                   <NavLink
                     label="View All"
                     url={`/viewAll/${section.attributes.category_name}`}

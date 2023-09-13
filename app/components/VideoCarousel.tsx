@@ -14,27 +14,28 @@ export default function VideoCarousel({
 }: {
   children: React.ReactNode;
 }) {
-  const { isSmallDevice } = useDevice();
+  const { isMobile } = useDevice();
 
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState<null | number>(null);
+
+  const handleResize = () => {
+    if (window.innerWidth >= 1440) {
+      setOffset(6);
+    } else if (window.innerWidth >= 1280) {
+      setOffset(5);
+    } else if (window.innerWidth >= 1024) {
+      setOffset(3);
+    } else if (window.innerWidth >= 760) {
+      setOffset(2);
+    } else if (window.innerWidth >= 540) {
+      setOffset(2);
+    } else {
+      setOffset(1);
+    }
+  };
 
   // compute offset depending on the number of slides to show according to the breakpoint
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setOffset(6);
-      } else if (window.innerWidth >= 1280) {
-        setOffset(5);
-      } else if (window.innerWidth >= 1024) {
-        setOffset(3);
-      } else if (window.innerWidth >= 760) {
-        setOffset(2);
-      } else if (window.innerWidth >= 540) {
-        setOffset(2);
-      } else {
-        setOffset(1);
-      }
-    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -100,15 +101,17 @@ export default function VideoCarousel({
   //   }
   // }, []);
 
-  if (isSmallDevice) {
+  if (!offset) return null;
+
+  if (!isMobile) {
     return (
-      <div className="flex flex-row gap-3 py-3 overflow-x-auto hidescroll">
-        {children}
-      </div>
+      <ReactSlickCarousel settings={settings}>{children}</ReactSlickCarousel>
     );
   }
 
   return (
-    <ReactSlickCarousel settings={settings}>{children}</ReactSlickCarousel>
+    <div className="flex flex-row gap-3 py-3 overflow-x-auto hidescroll">
+      {children}
+    </div>
   );
 }

@@ -23,25 +23,26 @@ export default function BrowseByStateCarousel({
 }) {
   const { isSmallDevice } = useDevice();
 
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState<null | number>(null);
+
+  const handleResize = () => {
+    if (window.innerWidth >= 1440) {
+      setOffset(4);
+    } else if (window.innerWidth >= 1280) {
+      setOffset(3);
+    } else if (window.innerWidth >= 1024) {
+      setOffset(2);
+    } else if (window.innerWidth >= 760) {
+      setOffset(2);
+    } else if (window.innerWidth >= 540) {
+      setOffset(2);
+    } else {
+      setOffset(1);
+    }
+  };
 
   // compute offset depending on the number of slides to show according to the breakpoint
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1440) {
-        setOffset(4);
-      } else if (window.innerWidth >= 1280) {
-        setOffset(3);
-      } else if (window.innerWidth >= 1024) {
-        setOffset(2);
-      } else if (window.innerWidth >= 760) {
-        setOffset(2);
-      } else if (window.innerWidth >= 540) {
-        setOffset(2);
-      } else {
-        setOffset(1);
-      }
-    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -79,8 +80,8 @@ export default function BrowseByStateCarousel({
     {
       breakpoint: 600,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 1,
+        slidesToScroll: 1,
       },
     },
   ];
@@ -108,6 +109,8 @@ export default function BrowseByStateCarousel({
   //     elements[i].setAttribute("style", "display: none");
   //   }
   // }, []);
+
+  if (!offset) return null;
 
   if (isSmallDevice) {
     return (
