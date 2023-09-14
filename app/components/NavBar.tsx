@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useScroll } from "../hooks";
 import { SearchBox } from "react-instantsearch-hooks-web";
 import { useRouter } from "next/navigation";
-import { useSsrProvider } from "../providers";
+import { useSsrProvider } from "./providers/SsrProvider";
 
 interface NavLink {
   id?: number;
@@ -90,7 +90,7 @@ export default function Navbar({
     <div
       className={`bg-white px-4 py-2 sticky top-0 ${
         isScrolling ? "shadow-md" : ""
-      } z-50`}
+      } z-20`}
     >
       <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>

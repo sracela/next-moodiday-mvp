@@ -24,7 +24,7 @@
   --default-btn-bg: #FFCB64;
   --disable-btn-bg-rgb: 217, 217, 217;
   --disable-btn-bg: #D9D9D9;
-  --hover-btn-bg-rgb: 49, 49, 49, 0.1;
+  --hover-btn-bg: #b9b8b8;
   --input-border-color-rgb: 230, 230, 230;
   --input-border-color: #E6E6E6;
   --icon-size-1x: 14px;
@@ -93,6 +93,7 @@ article {
 
 .font-logo {
   font-family: var(--logo-font);
+  color: #000;
 }
 
 .section-heading {
@@ -611,4 +612,48 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-top: 2rem;
   transform: scale(1.5);
   line-height: normal;
+}
+
+.age-card {
+  background-color: hsla(0, 0%, 100%, .7);
+  background-color: rgba(var(--white-rgb), .7);
+  border-radius: 15px;
+  box-shadow: 0 0 40px rgba(49, 49, 49, .06);
+  box-shadow: 0 0 40px rgba(var(--body-font-color-rgb), .06);
+  color: #000;
+  color: var(--black);
+  padding: 56px 50px 62px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 28px;
+  }
+}
+
+.moodiButton {
+  background-color: var(--disable-btn-bg);
+  border-radius: 5px;
+  color: #000;
+  color: var(--black);
+  font-size: 18px;
+  font-size: var(--fontSize-3x);
+  height: 40px;
+  line-height: 23px;
+  min-width: 100px;
+  outline: none;
+  padding: 8px 14px;
+  text-align: center;
+
+  &:hover {
+    background-color: var(--hover-btn-bg);
+  }
+}
+
+.moodiButton.primary {
+  background-color: var(--default-btn-bg);
+  color: var(--black);
+}
+
+.moodiLink {
+  text-decoration: underline;
 }

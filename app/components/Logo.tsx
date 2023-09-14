@@ -6,7 +6,7 @@ export default function Logo({
   src,
   children,
 }: {
-  src: string | null;
+  src?: string | null;
   children?: React.ReactNode;
 }) {
   return (

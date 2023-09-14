@@ -7,6 +7,7 @@ import { FALLBACK_SEO } from "./utils/constants";
 import Footer from "./components/Footer";
 import { Providers } from "./providers";
 import Script from "next/script";
+import AgeGateModal from "./components/AgeGateModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -68,6 +69,10 @@ export default async function RootLayout({
       {/* <body className={inter.className}> */}
       <body>
         <Providers>
+          <AgeGateModal
+            logoUrl={navbar.logo.logoImg}
+            logoText={navbar.logo.logoText}
+          />
           <Navbar
             links={navbar.links}
             logoUrl={navbar.logo.logoImg}

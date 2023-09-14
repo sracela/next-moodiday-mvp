@@ -12,7 +12,7 @@ export default function Modal({ video }: { video: any }) {
           <div className="absolute inset-0 bg-background-overflow opacity-75"></div>
         </div>
         <div className="flex justify-center items-center relative bg-white rounded-lg transform transition-all modal-box">
-          {video && video?.[0] && (
+          {video && video.length > 0 && (
             <article className="modal-box-inner">
               <h1 style={{ display: "none" }}>
                 {video[0]?.attributes?.video_name}

@@ -1,35 +1,9 @@
 "use client";
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
-import { createContext, useContext, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Configure, InstantSearch } from "react-instantsearch-hooks-web";
-
-const SsrProviderContext = createContext<boolean>(false);
-
-export function SsrProvider({
-  children,
-  hasMounted,
-}: {
-  children: React.ReactNode;
-  hasMounted: boolean;
-}) {
-  return (
-    <SsrProviderContext.Provider value={hasMounted}>
-      {children}
-    </SsrProviderContext.Provider>
-  );
-}
-
-export const useSsrProvider = () => {
-  const context = useContext(SsrProviderContext);
-
-  if (context === undefined) {
-    throw new Error(
-      "useSsrProvider must be used within a SessionSectionContext"
-    );
-  }
-
-  return context;
-};
+import { SsrProvider } from "./components/providers/SsrProvider";
+import { AgeGateProvider } from "./components/providers/AgeGateProvider";
 
 const searchClient = instantMeiliSearch(
   process.env.NEXT_PUBLIC_MEILISEARCH_HOST!,
@@ -38,25 +12,32 @@ const searchClient = instantMeiliSearch(
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [hasMounted, setHasMounted] = useState(false);
+  const [requiredAge, setRequiredAge] = useState(true);
 
   useLayoutEffect(() => {
     setHasMounted(true);
   }, []);
 
   if (!hasMounted) {
-    return <SsrProvider hasMounted={false}>{children}</SsrProvider>;
+    return (
+      <SsrProvider hasMounted={false}>
+        <AgeGateProvider>{children}</AgeGateProvider>
+      </SsrProvider>
+    );
   }
 
   return (
     <SsrProvider hasMounted={true}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName="video-detail"
-        routing={false}
-      >
-        <Configure hitsPerPage={18} />
-        {children}
-      </InstantSearch>
+      <AgeGateProvider>
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="video-detail"
+          routing={false}
+        >
+          <Configure hitsPerPage={18} />
+          {children}
+        </InstantSearch>
+      </AgeGateProvider>
     </SsrProvider>
   );
 }
