@@ -88,77 +88,83 @@ export default async function MainSection({
               {browseByBrandPosition && browseByBrandPosition - 1 === index && (
                 <BrowseByBrandSection brands={brands} />
               )}
-              <div key={section.id} className="px-2 flex flex-col">
-                <h2 className="py-2 section-heading">
-                  {section.attributes.category_name}
-                </h2>
-                <div className="w-full flex justify-end sm:pr-12 sm:pb-2">
-                  <NavLink
-                    label="View All"
-                    url={`/viewAll/${section.attributes.category_name}`}
-                    active
-                  />
-                </div>
-                <div className="pt-2">
-                  <VideoCarousel>
-                    {section.attributes.video_details.data.map((video: any) => {
-                      const videoThumbnail =
-                        video.attributes.thumbnail?.data?.attributes?.url ??
-                        `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
+              {section.attributes.video_details.data.length > 0 && (
+                <div key={section.id} className="px-2 flex flex-col">
+                  <h2 className="py-2 section-heading">
+                    {section.attributes.category_name}
+                  </h2>
+                  <div className="w-full flex justify-end sm:pr-12 sm:pb-2">
+                    <NavLink
+                      label="View All"
+                      url={`/viewAll/${section.attributes.category_name}`}
+                      active
+                    />
+                  </div>
+                  <div className="pt-2">
+                    <VideoCarousel>
+                      {section.attributes.video_details.data.map(
+                        (video: any) => {
+                          const videoThumbnail =
+                            video.attributes.thumbnail?.data?.attributes?.url ??
+                            `https://image.mux.com/${video?.attributes?.mux_video?.data?.attributes?.playback_id}/thumbnail.jpg?time=0`;
 
-                      return (
-                        // <Link
-                        //   key={video.id}
-                        //   href={`/${getVideoURL()}/video/${
-                        //     video.attributes.slug
-                        //   }?autoplay=true&mute=false`}
-                        // >
-                        <div key={video.id}>
-                          <div className="flex flex-col items-start justify-between gap-2">
-                            <div
-                              style={{
-                                width: "max-content",
-                                position: "relative",
-                              }}
-                            >
-                              {video.attributes.subcategories && (
-                                <Badge tag={video.attributes.subcategories} />
-                              )}
+                          return (
+                            // <Link
+                            //   key={video.id}
+                            //   href={`/${getVideoURL()}/video/${
+                            //     video.attributes.slug
+                            //   }?autoplay=true&mute=false`}
+                            // >
+                            <div key={video.id}>
+                              <div className="flex flex-col items-start justify-between gap-2">
+                                <div
+                                  style={{
+                                    width: "max-content",
+                                    position: "relative",
+                                  }}
+                                >
+                                  {video.attributes.subcategories && (
+                                    <Badge
+                                      tag={video.attributes.subcategories}
+                                    />
+                                  )}
 
-                              <Link
-                                key={video.id}
-                                href={`/${getVideoURL()}/video/${
-                                  video.attributes.slug
-                                }?autoplay=true&mute=false`}
-                              >
-                                <Image
-                                  src={videoThumbnail}
-                                  alt={video?.attributes.video_name}
-                                  className="thumbnail-image"
-                                  width={165}
-                                  height={273}
-                                />
-                              </Link>
+                                  <Link
+                                    key={video.id}
+                                    href={`/${getVideoURL()}/video/${
+                                      video.attributes.slug
+                                    }?autoplay=true&mute=false`}
+                                  >
+                                    <Image
+                                      src={videoThumbnail}
+                                      alt={video?.attributes.video_name}
+                                      className="thumbnail-image"
+                                      width={165}
+                                      height={273}
+                                    />
+                                  </Link>
+                                </div>
+
+                                <div className="video-name">
+                                  <Link
+                                    key={video.id}
+                                    href={`/${getVideoURL()}/video/${
+                                      video.attributes.slug
+                                    }?autoplay=true&mute=false`}
+                                  >
+                                    {video.attributes.video_name}
+                                  </Link>
+                                </div>
+                              </div>
                             </div>
-
-                            <div className="video-name">
-                              <Link
-                                key={video.id}
-                                href={`/${getVideoURL()}/video/${
-                                  video.attributes.slug
-                                }?autoplay=true&mute=false`}
-                              >
-                                {video.attributes.video_name}
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                        // </Link>
-                      );
-                    })}
-                  </VideoCarousel>
+                            // </Link>
+                          );
+                        }
+                      )}
+                    </VideoCarousel>
+                  </div>
                 </div>
-              </div>
+              )}
             </>
           );
         })}
