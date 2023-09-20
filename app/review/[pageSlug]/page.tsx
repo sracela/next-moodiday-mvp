@@ -3,6 +3,7 @@ import { getPageBySlug } from "@/app/utils/api";
 import { getMetaFromMasterTag } from "../../utils/metadata";
 import { MASTER_TAGS_CONTENT } from "../../utils/constants";
 import MainSection from "../../components/MainSection";
+import NotFound from "@/app/not-found";
 
 type Props = {
   params: {
@@ -43,18 +44,27 @@ const getTitleAndDescription = (slug: string) => {
 
 export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
-  const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
+  let pageResult = null;
+  let pageConfigResult = null;
+  try {
+    const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
+    pageResult = page;
+    pageConfigResult = pageConfig;
+  } catch (error) {
+    return <NotFound />;
+  }
+
   const { title, description } = getTitleAndDescription(pageSlug);
   const heroImageUrl =
-    pageConfig.data.attributes.hero_image.data.attributes.url;
-  if (!page || page.data.length === 0) return null;
+    pageConfigResult.data.attributes.hero_image.data.attributes.url;
+  if (!pageResult || pageResult.data.length === 0) return null;
   const getVideoURL = () => {
     return "review/" + pageSlug;
   };
 
   return (
     <MainSection
-      page={page}
+      page={pageResult}
       title={title}
       description={pageSlug === "home" || pageSlug === "" ? description : null}
       imageURL={getImageURL(pageSlug) || heroImageUrl}

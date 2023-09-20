@@ -3,6 +3,7 @@ import { getBrands, getPageBySlug, getStates } from "@/app/utils/api";
 import { getMetaFromMasterTag } from "../utils/metadata";
 import MainSection from "../components/MainSection";
 import { MASTER_TAGS_CONTENT } from "../utils/constants";
+import NotFound from "../not-found";
 
 type Props = {
   params: {
@@ -42,21 +43,28 @@ const getTitleAndDescription = (slug: string) => {
 
 export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
-  const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
+  let pageResult = null;
+  let pageConfigResult = null;
+  try {
+    const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
+    pageResult = page;
+    pageConfigResult = pageConfig;
+  } catch (error) {
+    return <NotFound />;
+  }
   const states = await getStates();
   const brands = await getBrands();
   const { title, description } = getTitleAndDescription(pageSlug);
 
-  if (!page || page.data.length === 0) return null;
-
+  if (!pageResult || pageResult.data.length === 0) return null;
   const getVideoURL = () => {
     return pageSlug;
   };
 
   return (
     <MainSection
-      page={page}
-      pageConfig={pageConfig}
+      page={pageResult}
+      pageConfig={pageConfigResult}
       states={states}
       brands={brands}
       title={title}

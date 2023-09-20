@@ -6,7 +6,7 @@ export default function PageLayout({
   parallel: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="mb-auto mt-auto">
       {children}
       {parallel}
     </section>

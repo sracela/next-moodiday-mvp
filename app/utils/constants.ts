@@ -252,3 +252,36 @@ export const MASTER_TAGS_CONTENT = {
     },
   ],
 };
+
+export const CREATORS = [
+  {
+    id: 1,
+    name: "Rachael B.",
+    slug: "rachaelb"
+  },
+  {
+    id: 2,
+    name: "Dalton M.",
+    slug: "daltonm"
+  },
+  {
+    id: 3,
+    name: "Eric G.",
+    slug: "ericg"
+  },
+  {
+    id: 4,
+    name: "Kerry S.",
+    slug: "kerrys"
+  },
+  {
+    id: 5,
+    name: "Katie T.",
+    slug: "katiet"
+  },
+  {
+    id: 6,
+    name: "Ritz G.",
+    slug: "ritzg"
+  }
+]

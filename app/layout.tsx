@@ -63,7 +63,6 @@ export default async function RootLayout({
   if (!global.data) return null;
 
   const { navigation: navbar, footer } = global.data.attributes;
-
   return (
     <html lang="en">
       {/* <body className={inter.className}> */}
@@ -79,7 +78,7 @@ export default async function RootLayout({
             logoText={navbar.logo.logoText}
           />
 
-          <main className="container mx-auto min-h-screen overflow-x-hidden px-6">
+          <main className="container mx-auto min-h-[60vh] overflow-x-hidden px-6">
             {children}
           </main>
           <Footer
