@@ -114,7 +114,7 @@ export async function getPageBySlug(slug?: string) {
       master_tag: {
         populate: {
           quick_pic_position: true,
-          hero_image: true
+          hero_image: true,
         },
       },
       master_categories: {
@@ -131,12 +131,21 @@ export async function getPageBySlug(slug?: string) {
       },
     },
   };
-  const data = await fetchAPI(path, urlParamsObject, {});
 
-  return {
-    pageData: data.data[0].attributes.master_categories,
-    pageConfig: data.data[0].attributes.master_tag,
-  };
+  try {
+    const data = await fetchAPI(path, urlParamsObject, {});
+    return {
+      pageData: data.data[0].attributes.master_categories,
+      pageConfig: data.data[0].attributes.master_tag,
+      isError: false,
+    };
+  } catch (error) {
+    return {
+      pageData: [],
+      pageConfig: [],
+      isError: true,
+    };
+  }
 }
 
 export async function getVideoDataBySlug(

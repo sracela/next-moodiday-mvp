@@ -43,28 +43,22 @@ const getTitleAndDescription = (slug: string) => {
 
 export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
-  let pageResult = null;
-  let pageConfigResult = null;
-  try {
-    const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
-    pageResult = page;
-    pageConfigResult = pageConfig;
-  } catch (error) {
-    return <NotFound />;
-  }
+  const { pageData: page, pageConfig, isError } = await getPageBySlug(pageSlug);
+
   const states = await getStates();
   const brands = await getBrands();
   const { title, description } = getTitleAndDescription(pageSlug);
-
-  if (!pageResult || pageResult.data.length === 0) return null;
   const getVideoURL = () => {
     return pageSlug;
   };
 
+  if (isError) return <NotFound />;
+  if (!page) return null;
+
   return (
     <MainSection
-      page={pageResult}
-      pageConfig={pageConfigResult}
+      page={page}
+      pageConfig={pageConfig}
       states={states}
       brands={brands}
       title={title}
