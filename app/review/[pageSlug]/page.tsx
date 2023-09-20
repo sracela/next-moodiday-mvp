@@ -37,16 +37,17 @@ const getTitleAndDescription = (slug: string) => {
   );
   if (!pageData) return { title: null, description: null };
   const { title, description } = pageData?.attributes as any;
+
   return { title: title || null, description: description || null };
 };
 
 export default async function PageRoute({ params }: Props) {
   const { pageSlug } = params;
-  const { pageData: page } = await getPageBySlug(pageSlug);
+  const { pageData: page, pageConfig } = await getPageBySlug(pageSlug);
   const { title, description } = getTitleAndDescription(pageSlug);
-
+  const heroImageUrl =
+    pageConfig.data.attributes.hero_image.data.attributes.url;
   if (!page || page.data.length === 0) return null;
-
   const getVideoURL = () => {
     return "review/" + pageSlug;
   };
@@ -56,7 +57,7 @@ export default async function PageRoute({ params }: Props) {
       page={page}
       title={title}
       description={pageSlug === "home" || pageSlug === "" ? description : null}
-      imageURL={getImageURL(pageSlug)}
+      imageURL={getImageURL(pageSlug) || heroImageUrl}
       getVideoURL={getVideoURL}
     />
   );

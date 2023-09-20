@@ -114,6 +114,7 @@ export async function getPageBySlug(slug?: string) {
       master_tag: {
         populate: {
           quick_pic_position: true,
+          hero_image: true
         },
       },
       master_categories: {
