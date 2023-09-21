@@ -1,10 +1,14 @@
-import Image from "next/image";
+import dynamic from "next/dynamic";
+//import Image from "next/image";
 import Link from "next/link";
 import VideoCarousel from "./VideoCarousel";
 import Badge from "./Badge";
 import { NavLink } from "./NavBar";
 import BrowseByStateSection from "./BrowseByStateSection";
 import BrowseByBrandSection from "./BrowseByBrandSection";
+import CustomImage from "./CustomImage";
+
+const Image = dynamic(() => import("next/image"), { ssr: false });
 
 type VideoDetails = {
   video_id: string;
@@ -135,10 +139,10 @@ export default async function MainSection({
                                       video.attributes.slug
                                     }?autoplay=true&mute=false`}
                                   >
-                                    <Image
+                                    <CustomImage
+                                      key={video.id}
                                       src={videoThumbnail}
                                       alt={video?.attributes.video_name}
-                                      className="thumbnail-image"
                                       width={165}
                                       height={273}
                                     />
