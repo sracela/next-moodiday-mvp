@@ -6,6 +6,7 @@ import { useInfiniteHits, useInstantSearch } from "react-instantsearch";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Badge from "../../components/Badge";
+import CustomImage from "@/app/components/CustomImage";
 
 type Props = {
   params: {
@@ -125,12 +126,12 @@ export default function PageRoute({ params }: Props) {
                       {video.subcategories && (
                         <Badge tag={video.subcategories} />
                       )}
-                      <Image
-                        src={video.thumbnail}
+                      <CustomImage
                         alt="video thumbnail"
-                        width={500}
                         height={500}
-                        className="rounded-lg"
+                        width={500}
+                        key={video.id}
+                        src={video.thumbnail}
                       />
                       <p className="video-name">{video.video_name}</p>
                     </div>

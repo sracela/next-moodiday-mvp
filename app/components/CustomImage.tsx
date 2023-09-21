@@ -18,7 +18,12 @@ export default function CustomImage({
   const [isLoading, setIsLoading] = useState(true);
   return (
     <div>
-      {isLoading && <VideoCardSkeleton width={width} height={height} />}
+      {isLoading && (
+        <VideoCardSkeleton
+          width={width > 165 ? 165 : width}
+          height={height > 273 ? 273 : height}
+        />
+      )}
       <Image
         src={src}
         alt={alt}
