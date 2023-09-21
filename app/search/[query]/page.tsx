@@ -2,10 +2,7 @@
 import { Metadata } from "next";
 import { getVideoDataBySlug } from "@/app/utils/api";
 import Image from "next/image";
-import {
-  useInfiniteHits,
-  useInstantSearch,
-} from "react-instantsearch-hooks-web";
+import { useInfiniteHits, useInstantSearch } from "react-instantsearch";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Badge from "../../components/Badge";

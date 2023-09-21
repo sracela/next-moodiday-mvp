@@ -2,12 +2,11 @@
 import React, { useEffect } from "react";
 import Logo from "./Logo";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useScroll } from "../hooks";
-import { SearchBox } from "react-instantsearch-hooks-web";
 import { useRouter } from "next/navigation";
-import { useSsrProvider } from "./providers/SsrProvider";
+import ClientOnly from "./ClientOnly";
+import { SearchBox } from "react-instantsearch";
 
 interface NavLink {
   id?: number;
@@ -68,7 +67,7 @@ export default function Navbar({
   logoUrl: string | null;
   logoText: string | null;
 }) {
-  const hasMounted = useSsrProvider();
+  // const hasMounted = useSsrProvider();
   const isScrolling = useScroll();
   const router = useRouter();
   const path = usePathname();
@@ -92,7 +91,7 @@ export default function Navbar({
         isScrolling ? "shadow-md" : ""
       } z-20`}
     >
-      <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
+      <div className="relative z-30 container flex justify-between h-16 mx-auto px-0 sm:px-6">
         <Logo src={logoUrl}>
           {logoText && (
             <h2 className="text-2xl font-bold whitespace-nowrap">{logoText}</h2>
@@ -106,46 +105,7 @@ export default function Navbar({
             ))}
           </ul>
         </div>
-
-        {hasMounted && (
-          <div className="searchBox flex">
-            <SearchBox
-              placeholder="Search for products"
-              classNames={{
-                input: "navSearch",
-                submit: "searchBtn",
-                reset: "clearBtn",
-                form: "searchForm",
-              }}
-              //navigate to search page
-              onSubmit={(event: any) => {
-                event.preventDefault();
-
-                const searchQuery = event.target[0].value;
-                if (searchQuery) {
-                  router.push(`/search/${searchQuery}`);
-                }
-              }}
-              searchAsYouType={false}
-              submitIconComponent={() => (
-                <Image
-                  src={"/icon-search-header.svg"}
-                  alt="reset search"
-                  width={14}
-                  height={14}
-                />
-              )}
-              resetIconComponent={() => (
-                <Image
-                  src={"/cross.png"}
-                  alt="reset search"
-                  width={10}
-                  height={10}
-                />
-              )}
-            />
-          </div>
-        )}
+        <div className="searchBox invisible"></div>
 
         {/* <div className="p-4 pr-0 flex gap-x-1 lg:hidden">
           <button className="px-1 sm:hidden cursor-pointer">

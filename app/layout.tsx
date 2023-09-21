@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import { Providers } from "./providers";
 import Script from "next/script";
 import AgeGateModal from "./components/AgeGateModal";
+import ClientOnly from "./components/ClientOnly";
+import MoodiSearchBox from "./components/MoodiSearchBox";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,32 +67,35 @@ export default async function RootLayout({
   const { navigation: navbar, footer } = global.data.attributes;
   return (
     <html lang="en">
-      {/* <body className={inter.className}> */}
-      <body>
+      <body className="min-h-screen">
+        <Navbar
+          links={navbar.links}
+          logoUrl={navbar.logo.logoImg}
+          logoText={navbar.logo.logoText}
+        />
         <Providers>
-          <AgeGateModal
-            logoUrl={navbar.logo.logoImg}
-            logoText={navbar.logo.logoText}
-          />
-          <Navbar
-            links={navbar.links}
-            logoUrl={navbar.logo.logoImg}
-            logoText={navbar.logo.logoText}
-          />
-
+          <ClientOnly>
+            <AgeGateModal
+              logoUrl={navbar.logo.logoImg}
+              logoText={navbar.logo.logoText}
+            />
+          </ClientOnly>
+          <ClientOnly>
+            <MoodiSearchBox />
+          </ClientOnly>
           <main className="container mx-auto min-h-[60vh] overflow-x-hidden px-6">
             {children}
           </main>
-          <Footer
-            logoUrl={footer.footerLogo.logoImg}
-            logoText={footer.footerLogo.logoText}
-            socialLinks={footer.socialLinks}
-            footerColumns={footer.footerColumns}
-            footerForm={footer.footerForm}
-            externalImage={footer.externalImage}
-            disclaimer={footer.disclaimer}
-          />
         </Providers>
+        <Footer
+          logoUrl={footer.footerLogo.logoImg}
+          logoText={footer.footerLogo.logoText}
+          socialLinks={footer.socialLinks}
+          footerColumns={footer.footerColumns}
+          footerForm={footer.footerForm}
+          externalImage={footer.externalImage}
+          disclaimer={footer.disclaimer}
+        />
         <Script
           src="https://js.hsforms.net/forms/embed/v2.js"
           id="form-script"
