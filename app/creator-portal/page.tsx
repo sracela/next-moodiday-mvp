@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ReviewForm from "../components/ReviewForm";
 import UploadForm from "../components/UploadForm";
+import { CREATORS } from "../utils/constants";
 
 export default function BudtenderNetwork() {
   return (
@@ -17,29 +18,16 @@ export default function BudtenderNetwork() {
             />
           </video>
           <div className="creatorLinkWrapper my-2">
-            <Link href="/creator/rachaelb">
-              <span>Rachael B.</span>
-            </Link>
-            |&nbsp;
-            <Link href="/creator/daltonm">
-              <span>Dalton M.</span>
-            </Link>
-            |&nbsp;
-            <Link href="/creator/ericg">
-              <span>Eric G.</span>
-            </Link>
-            |&nbsp;
-            <Link href="/creator/kerrys">
-              <span>Kerry S.</span>
-            </Link>
-            |&nbsp;
-            <Link href="/creator/katiet">
-              <span>Katie T.</span>
-            </Link>
-            |&nbsp;
-            <Link href="/creator/ritzg">
-              <span>Ritz G.</span>
-            </Link>
+            {CREATORS.map((creator, index) => {
+              return (
+                <>
+                  <Link href={"/creator/" + creator.slug} key={creator.id}>
+                    <span>{creator.name}</span>
+                  </Link>
+                  {index !== CREATORS.length - 1 && <span>|&nbsp;</span>}
+                </>
+              );
+            })}
           </div>
         </div>
         <div className="creatorPortalForm mt-5">
