@@ -6,7 +6,7 @@ import { MdClose } from "react-icons/md";
 export default function CloseModalButton() {
   const router = useRouter();
   const handleBack = () => {
-    if (window.history.state && window.history.state.idx > 0) {
+    if (history.length > 10) {
       router.back();
     } else {
       router.push("/");
