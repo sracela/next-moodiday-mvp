@@ -6,7 +6,11 @@ import { MdClose } from "react-icons/md";
 export default function CloseModalButton() {
   const router = useRouter();
   const handleBack = () => {
-    router.back();
+    if (history.length > 10) {
+      router.back();
+    } else {
+      router.push("/");
+    }
   };
   return (
     <button className="close-btn" onClick={handleBack}>
