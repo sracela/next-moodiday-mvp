@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { getVideosByMasterCatergory } from "@/app/utils/api";
 import Link from "next/link";
 import { getMetaFromMasterTag } from "../../utils/metadata";
-import Image from "next/image";
 import Badge from "../../components/Badge";
 import GoBackButton from "../../components/GoBackButton";
+import CustomImage from "@/app/components/CustomImage";
 
 type Props = {
   params: {
@@ -61,12 +61,12 @@ export default async function PageRoute({ params }: Props) {
                     {video.attributes.subcategories && (
                       <Badge tag={video.attributes.subcategories} />
                     )}
-                    <Image
-                      src={videoThumbnail}
+                    <CustomImage
                       alt="video thumbnail"
-                      width={500}
                       height={500}
-                      className="rounded-lg"
+                      width={500}
+                      key={video.id}
+                      src={videoThumbnail}
                     />
                     <p className="video-name">{video.attributes.video_name}</p>
                   </div>
