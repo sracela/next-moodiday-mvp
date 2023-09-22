@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Badge from "../../components/Badge";
 import CustomImage from "@/app/components/CustomImage";
+import NoResults from "@/app/components/NoResults";
+import Loading from "../../loading";
 
 type Props = {
   params: {
@@ -98,10 +100,7 @@ export default function PageRoute({ params }: Props) {
     getVideos(hits);
   }, [hits]);
   // if (!page || page.data.length === 0) return null;
-
-  if (!hits || hits.length === 0) return null;
-
-  return (
+  return hits.length > 0 ? (
     <>
       <div className="text-center">
         <h1 className="main-heading">Search Results</h1>
@@ -112,34 +111,38 @@ export default function PageRoute({ params }: Props) {
       <div className="flex flex-col py-2 gap-6">
         <div className="px-4">
           <h2 className="py-2 section-heading">Videos</h2>
-          <div className="pt-2">
-            <div className="py-2 video-grid">
-              {videos.map((video: any) => {
-                if (!video) return;
-                return (
-                  <Link
-                    key={video.id}
-                    href={`/search/${indexUiState.query}/video/${video.slug}`}
-                    className="flex flex-col"
-                  >
-                    <div className="flex flex-col items-start justify-between gap-2 relative">
-                      {video.subcategories && (
-                        <Badge tag={video.subcategories} />
-                      )}
-                      <CustomImage
-                        alt="video thumbnail"
-                        height={500}
-                        width={500}
-                        key={video.id}
-                        src={video.thumbnail}
-                      />
-                      <p className="video-name">{video.video_name}</p>
-                    </div>
-                  </Link>
-                );
-              })}
+          {videos.length > 0 ? (
+            <div className="pt-2">
+              <div className="py-2 video-grid">
+                {videos.map((video: any) => {
+                  if (!video) return;
+                  return (
+                    <Link
+                      key={video.id}
+                      href={`/search/${indexUiState.query}/video/${video.slug}`}
+                      className="flex flex-col"
+                    >
+                      <div className="flex flex-col items-start justify-between gap-2 relative">
+                        {video.subcategories && (
+                          <Badge tag={video.subcategories} />
+                        )}
+                        <CustomImage
+                          alt="video thumbnail"
+                          height={500}
+                          width={500}
+                          key={video.id}
+                          src={video.thumbnail}
+                        />
+                        <p className="video-name">{video.video_name}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          ) : (
+            <Loading />
+          )}
         </div>
       </div>
       <div className="flex justify-center self-end">
@@ -154,5 +157,7 @@ export default function PageRoute({ params }: Props) {
         </button>
       </div>
     </>
+  ) : (
+    <NoResults searchTerm={indexUiState.query || ""} />
   );
 }
