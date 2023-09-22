@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-//import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import VideoCarousel from "./VideoCarousel";
 import Badge from "./Badge";
@@ -7,8 +7,6 @@ import { NavLink } from "./NavBar";
 import BrowseByStateSection from "./BrowseByStateSection";
 import BrowseByBrandSection from "./BrowseByBrandSection";
 import CustomImage from "./CustomImage";
-
-const Image = dynamic(() => import("next/image"), { ssr: false });
 
 type VideoDetails = {
   video_id: string;
