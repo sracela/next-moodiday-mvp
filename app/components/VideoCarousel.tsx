@@ -56,18 +56,16 @@ export default function VideoCarousel({
   const [settings, setSettings] = useState<any>(defaultSettings);
 
   const handleResize = () => {
-    if (window.innerWidth >= 1440) {
-      setOffset(6);
-    } else if (window.innerWidth >= 1280) {
-      setOffset(5);
-    } else if (window.innerWidth >= 1024) {
-      setOffset(3);
-    } else if (window.innerWidth >= 760) {
-      setOffset(2);
-    } else if (window.innerWidth >= 540) {
-      setOffset(2);
-    } else {
+    if (window.innerWidth < 720) {
       setOffset(1);
+    } else if (window.innerWidth > 720 && window.innerWidth <= 760) {
+      setOffset(2);
+    } else if (window.innerWidth > 760 && window.innerWidth <= 1024) {
+      setOffset(3);
+    } else if (window.innerWidth > 1024 && window.innerWidth <= 1280) {
+      setOffset(5);
+    } else if (window.innerWidth > 1280) {
+      setOffset(6);
     }
   };
 
