@@ -432,7 +432,7 @@ article {
   justify-content: end;
   align-items: center;
   margin-left: 8px;
-  min-width: 200px;
+  min-width: 120px;
   max-width: 300px;
   width: auto;
 }
@@ -484,6 +484,7 @@ input[type="search"]::-webkit-search-results-decoration {
   all: unset;
   max-width: 300px;
   width: auto;
+  overflow: hidden;
 }
 
 .searchBtn {
