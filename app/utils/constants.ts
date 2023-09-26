@@ -285,3 +285,132 @@ export const CREATORS = [
     slug: "ritzg"
   }
 ]
+
+ export const REVIEW_INVITE_BRANDS = [
+  {
+    id: 1,
+    name: "Eureka",
+    slug: "eureka",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Eureka%20Review%20Invite.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-231566669018161",
+      title: "Eureka Review Invite",
+      src: "https://form.jotform.com/231566669018161"
+    }
+  },
+  {
+    id: 2,
+    name: "Dablicator",
+    slug: "dablicator",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Dablicator%20Sizzle.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-231637369975169",
+      title: "Dablicator Review Invite",
+      src: "https://form.jotform.com/231637369975169"
+    }
+  },
+  {
+    id: 3,
+    name: "Wana",
+    slug: "wana",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Demo%20Review%20Banner.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-231638250826154",
+      title: "Wana Review Invite",
+      src: "https://form.jotform.com/231638250826154"
+    }
+  },
+  {
+    id: 4,
+    name: "Kynd",
+    slug: "kynd",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Kynd-Video-Banner.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-231736390299162",
+      title: "Kynd Review Invite",
+      src: "https://form.jotform.com/231736390299162"
+    }
+  },
+  {
+    id: 5,
+    name: "Mokotoke",
+    slug: "mokotoke",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Mokotoke%20Review%20Banner.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-231967047081156",
+      title: "Mokotoke Review Invite",
+      src: "https://form.jotform.com/231967047081156"
+    }
+  },
+  {
+    id: 6,
+    name: "FLAMER",
+    slug: "flamer",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/Flamer%20Review%20Invite%20Banner.mp4",
+          type: "video/mp4",
+        },
+      },
+    },
+    form: {
+      id: "JotFormIFrame-232045875742157",
+      title: "Flamer Review Invite",
+      src: "https://form.jotform.com/232045875742157"
+    }
+  },
+  {
+    id: 7,
+    name: "1906",
+    slug: "1906",
+    video: {
+      data: {
+        attributes: {
+          url: "https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/BrandReviewInvite/1906newhigh%20Review%20Banner.mp4",
+          type: "video/mp4",
+        },
+      }
+    },
+    form: {
+      id: "JotFormIFrame-232087764162156",
+      title: "1906 Review Invite",
+      src: "https://form.jotform.com/232087764162156"
+    }
+  }
+ ]

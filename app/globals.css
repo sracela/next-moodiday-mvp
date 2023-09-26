@@ -341,12 +341,12 @@ article {
   margin: 0 auto;
 }
 
-.creatorPortal {
+.mainVideoContainer {
   width: 50%;
   margin: 0 auto;
 }
 
-.creatorPortalForm {
+.generalFormContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -358,7 +358,7 @@ article {
   overflow-y: hidden;
 }
 
-.creatorPortalForm > iframe {
+.generalFormContainer > iframe {
   min-width: 100%;
   max-width: 100%;
   min-height: 886px !important;
