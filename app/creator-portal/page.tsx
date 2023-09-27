@@ -10,7 +10,7 @@ export default function BudtenderNetwork() {
         <h1 className="py-2 heading text-center">Creator Portal</h1>
       </div>
       <div className="flex flex-col mt-5 mx-auto w-full justify-center items-center align-start">
-        <div className="creatorPortal">
+        <div className="mainVideoContainer">
           <video width="100%" controls autoPlay={true} playsInline muted loop>
             <source
               src="https://moodiday.nyc3.cdn.digitaloceanspaces.com/moodiday/Spotlight/Moodi%20Day%20Creator%20Spotlight.mp4"
@@ -30,7 +30,7 @@ export default function BudtenderNetwork() {
             })}
           </div>
         </div>
-        <div className="creatorPortalForm mt-5">
+        <div className="generalFormContainer mt-5">
           <UploadForm />
         </div>
       </div>
